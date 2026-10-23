@@ -1,0 +1,14 @@
+# Datos locales: caché de APIs, CSV importados y la base de datos.
+# No se versionan (ver CLAUDE.md).
+data/
+
+# Entorno virtual que crea uv (se regenera con `uv sync`)
+.venv/
+
+# Archivos temporales de Python y pytest
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Basura de macOS
+.DS_Store
