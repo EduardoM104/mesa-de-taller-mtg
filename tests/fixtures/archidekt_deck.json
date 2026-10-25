@@ -1,0 +1,139 @@
+{
+  "id": 26390360,
+  "name": "Tokens",
+  "edhBracket": null,
+  "updatedAt": "2026-10-04T23:53:49.028991Z",
+  "categories": [
+    {
+      "name": "Land",
+      "includedInDeck": true
+    },
+    {
+      "name": "Battle",
+      "includedInDeck": true
+    },
+    {
+      "name": "Plan Cards",
+      "includedInDeck": true
+    },
+    {
+      "name": "Commander",
+      "includedInDeck": true
+    },
+    {
+      "name": "Card Disruption",
+      "includedInDeck": true
+    },
+    {
+      "name": "Card Advantage",
+      "includedInDeck": true
+    },
+    {
+      "name": "Planeswalker",
+      "includedInDeck": true
+    },
+    {
+      "name": "Ramp Spells",
+      "includedInDeck": true
+    },
+    {
+      "name": "Artifact",
+      "includedInDeck": true
+    },
+    {
+      "name": "Creature",
+      "includedInDeck": true
+    },
+    {
+      "name": "Enchantment",
+      "includedInDeck": true
+    },
+    {
+      "name": "Sorcery",
+      "includedInDeck": true
+    },
+    {
+      "name": "Mass Disruption",
+      "includedInDeck": true
+    },
+    {
+      "name": "Instant",
+      "includedInDeck": true
+    },
+    {
+      "name": "Maybeboard",
+      "includedInDeck": false
+    },
+    {
+      "name": "Sideboard",
+      "includedInDeck": true
+    }
+  ],
+  "cards": [
+    {
+      "categories": [
+        "Plan Cards"
+      ],
+      "quantity": 1,
+      "card": {
+        "uid": "b74876d8-f6a6-4b47-b960-b01a331bab01",
+        "oracleCard": {
+          "name": "All-Out Assault",
+          "uid": "de8c0e2d-3207-4bc6-83ef-91e33b26a981"
+        }
+      }
+    },
+    {
+      "categories": [
+        "Plan Cards"
+      ],
+      "quantity": 1,
+      "card": {
+        "uid": "8ca58965-1dfa-40ac-b6c8-f957167ff066",
+        "oracleCard": {
+          "name": "Hero of Bladehold",
+          "uid": "454a8902-8120-4373-96ee-bbf352b04e8d"
+        }
+      }
+    },
+    {
+      "categories": [
+        "Maybeboard"
+      ],
+      "quantity": 1,
+      "card": {
+        "uid": "483fa1cb-1e35-44f2-a143-98c0f107f5ca",
+        "oracleCard": {
+          "name": "Teferi's Protection",
+          "uid": "0d4ecdb1-ec90-497f-a7a4-1c68092b8757"
+        }
+      }
+    },
+    {
+      "categories": [
+        "Commander"
+      ],
+      "quantity": 1,
+      "card": {
+        "uid": "a062a004-984e-4b62-960c-af7288f7a3e9",
+        "oracleCard": {
+          "name": "Isshin, Two Heavens as One",
+          "uid": "65114758-9a75-43a7-96e8-0aa68faa6b24"
+        }
+      }
+    },
+    {
+      "categories": [
+        "Land"
+      ],
+      "quantity": 2,
+      "card": {
+        "uid": "b7387103-1df1-4fd0-9e91-1544509792c7",
+        "oracleCard": {
+          "name": "Swamp",
+          "uid": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68"
+        }
+      }
+    }
+  ]
+}
