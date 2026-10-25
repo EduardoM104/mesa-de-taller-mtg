@@ -129,6 +129,8 @@ ventana_victoria: "turno 7-9"
 restricciones:
   - Mantener la temática zombie aunque cueste algo de potencia
   - Sin Game Changers
+etiquetas_tema:            # etiquetas de Scryfall Tagger que marcan las piezas del tema
+  - repeatable creature tokens
 presupuesto_mxn: null
 notas: ""
 ```

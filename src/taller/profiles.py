@@ -29,6 +29,8 @@ class DeckProfile(BaseModel):
     plan_de_victoria: str = ""
     ventana_victoria: str = ""
     restricciones: list[str] = []
+    # Etiquetas de Scryfall Tagger que marcan las piezas del tema (ej. "attack trigger").
+    etiquetas_tema: list[str] = []
     presupuesto_mxn: float | None = None
     notas: str = ""
 

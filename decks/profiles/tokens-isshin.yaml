@@ -13,5 +13,8 @@ ventana_victoria: "turno 5"
 restricciones:
   - Mantenerse dentro de bracket 3
   - Priorizar consistencia sobre picos de potencia
+# Isshin duplica los disparos de ataque: esas son las piezas clave del tema.
+etiquetas_tema:
+  - attack trigger
 presupuesto_mxn: null
 notas: "Meta: jugar como bracket 3 muy constante, con ventana de victoria de nivel casi competitivo"
