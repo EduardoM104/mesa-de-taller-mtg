@@ -79,7 +79,23 @@
         "uid": "b74876d8-f6a6-4b47-b960-b01a331bab01",
         "oracleCard": {
           "name": "All-Out Assault",
-          "uid": "de8c0e2d-3207-4bc6-83ef-91e33b26a981"
+          "uid": "de8c0e2d-3207-4bc6-83ef-91e33b26a981",
+          "oTags": [
+            "alliteration",
+            "anthem",
+            "attack trigger",
+            "attacking matters",
+            "cycle-tdm-m-clan-spell",
+            "delayed trigger",
+            "extra combat phase",
+            "extra untap",
+            "gives deathtouch",
+            "intervening if clause",
+            "keyword anthem",
+            "power boost to all",
+            "toughness boost to all",
+            "untapper-creature"
+          ]
         }
       }
     },
@@ -92,7 +108,14 @@
         "uid": "8ca58965-1dfa-40ac-b6c8-f957167ff066",
         "oracleCard": {
           "name": "Hero of Bladehold",
-          "uid": "454a8902-8120-4373-96ee-bbf352b04e8d"
+          "uid": "454a8902-8120-4373-96ee-bbf352b04e8d",
+          "oTags": [
+            "attack trigger",
+            "attacking matters",
+            "attacking matters-self",
+            "battle cry",
+            "repeatable creature tokens"
+          ]
         }
       }
     },
@@ -105,7 +128,21 @@
         "uid": "483fa1cb-1e35-44f2-a143-98c0f107f5ca",
         "oracleCard": {
           "name": "Teferi's Protection",
-          "uid": "0d4ecdb1-ec90-497f-a7a4-1c68092b8757"
+          "uid": "0d4ecdb1-ec90-497f-a7a4-1c68092b8757",
+          "oTags": [
+            "damage prevention-you",
+            "exile on resolution",
+            "fog-selective",
+            "gives player protection",
+            "namesake spell",
+            "phasing",
+            "protects-all",
+            "protects-artifact",
+            "protects-creature",
+            "protects-enchantment",
+            "protects-land",
+            "protects-planeswalker"
+          ]
         }
       }
     },
@@ -118,7 +155,12 @@
         "uid": "a062a004-984e-4b62-960c-af7288f7a3e9",
         "oracleCard": {
           "name": "Isshin, Two Heavens as One",
-          "uid": "65114758-9a75-43a7-96e8-0aa68faa6b24"
+          "uid": "65114758-9a75-43a7-96e8-0aa68faa6b24",
+          "oTags": [
+            "attacking matters",
+            "hate-attacker",
+            "trigger doubler"
+          ]
         }
       }
     },
@@ -131,7 +173,14 @@
         "uid": "b7387103-1df1-4fd0-9e91-1544509792c7",
         "oracleCard": {
           "name": "Swamp",
-          "uid": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68"
+          "uid": "56719f6a-1a6c-4c0a-8d21-18f7d7350b68",
+          "oTags": [
+            "activated ability",
+            "cycle-lea-basic-land",
+            "eponymous",
+            "single english word name",
+            "unique type line"
+          ]
         }
       }
     }

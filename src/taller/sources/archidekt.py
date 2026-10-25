@@ -20,6 +20,7 @@ class DeckCard(BaseModel):
     scryfall_id: str  # id de la impresión elegida en Archidekt
     oracle_id: str  # id de la carta sin importar la edición
     category: str  # categoría principal en Archidekt ("" si no tiene)
+    tags: list[str] = []  # etiquetas de Scryfall Tagger que trae Archidekt (oTags)
 
 
 class Deck(BaseModel):
@@ -78,4 +79,5 @@ def to_deck_card(entry: dict) -> DeckCard:
         scryfall_id=entry["card"]["uid"],
         oracle_id=oracle["uid"],
         category=categories[0] if categories else "",
+        tags=oracle.get("oTags") or [],
     )
