@@ -7,7 +7,10 @@ authors = [
     { name = "Martin Rodriguez", email = "38300756+EduardoM104@users.noreply.github.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pydantic>=2.14.1",
+    "pyyaml>=6.0.3",
+]
 
 [project.scripts]
 taller = "taller:main"

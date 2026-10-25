@@ -1,0 +1,17 @@
+# Perfil del mazo Tokens. Tema y ventana confirmados por Martín (2026-10-23).
+slug: tokens-isshin
+archidekt_id: 26390360
+nombre: Tokens
+comandante: Isshin, Two Heavens as One
+bracket: 3
+bracket_teorico: null
+estado: armado
+lista_sincronizada: false
+tema: Mardu de ataques y tokens; Isshin duplica los disparos de ataque
+plan_de_victoria: Generar tokens al atacar, multiplicar con Isshin y cerrar con anthems o daño al entrar (Impact Tremors, Purphoros)
+ventana_victoria: "turno 5"
+restricciones:
+  - Mantenerse dentro de bracket 3
+  - Priorizar consistencia sobre picos de potencia
+presupuesto_mxn: null
+notas: "Meta: jugar como bracket 3 muy constante, con ventana de victoria de nivel casi competitivo"
