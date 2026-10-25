@@ -1,12 +1,13 @@
 """Revisión de bracket: Game Changers, tutores, turnos extra y destrucción masiva de tierras.
 
-Los combos de dos cartas se agregan con Commander Spellbook (paso 5).
+Los combos de dos cartas vienen de Commander Spellbook.
 Límites según la guía oficial de brackets de Commander.
 """
 
 import re
 
 from taller.analysis.pairing import Entry
+from taller.sources.spellbook import Combo
 
 # Máximo de Game Changers por bracket (None = sin límite).
 MAX_GAME_CHANGERS = {1: 0, 2: 0, 3: 3, 4: None, 5: None}
@@ -59,3 +60,14 @@ def bracket_warnings(findings: dict[str, list[str]], target: int) -> list[str]:
     if len(findings["tutores"]) > 2 and target <= 2:
         warnings.append(f"{len(findings['tutores'])} tutores; bracket {target} pide pocos.")
     return warnings
+
+
+def combo_warnings(present: list[Combo], target: int) -> list[str]:
+    """Avisos por combos de dos cartas ya presentes en el mazo."""
+    two_card = [combo for combo in present if len(combo.cards) == 2]
+    if not two_card or target >= 4:
+        return []
+    names = "; ".join(" + ".join(combo.cards) for combo in two_card)
+    if target <= 2:
+        return [f"Combos de dos cartas no permitidos en bracket {target}: {names}."]
+    return [f"Combos de dos cartas en bracket 3: no deben armarse antes del turno 6: {names}."]

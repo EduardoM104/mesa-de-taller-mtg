@@ -1,0 +1,93 @@
+{
+  "results": {
+    "identity": "WBR",
+    "included": [
+      {
+        "id": "2612-5035",
+        "uses": [
+          {
+            "card": {
+              "name": "Mirkwood Bats"
+            }
+          },
+          {
+            "card": {
+              "name": "Plague of Vermin"
+            }
+          }
+        ],
+        "produces": [
+          {
+            "feature": {
+              "name": "Each opponent loses the game"
+            }
+          },
+          {
+            "feature": {
+              "name": "Near-infinite creature tokens"
+            }
+          },
+          {
+            "feature": {
+              "name": "Near-infinite creature ETB"
+            }
+          },
+          {
+            "feature": {
+              "name": "Near-infinite lifeloss"
+            }
+          }
+        ],
+        "notablePrerequisites": "You have the highest life total.",
+        "popularity": 6185
+      }
+    ],
+    "almostIncluded": [
+      {
+        "id": "1692-4364",
+        "uses": [
+          {
+            "card": {
+              "name": "Aurelia, the Warleader"
+            }
+          },
+          {
+            "card": {
+              "name": "Helm of the Host"
+            }
+          }
+        ],
+        "produces": [
+          {
+            "feature": {
+              "name": "Infinite combat phases"
+            }
+          },
+          {
+            "feature": {
+              "name": "Infinite creature tokens with haste"
+            }
+          },
+          {
+            "feature": {
+              "name": "Infinite creature ETB"
+            }
+          },
+          {
+            "feature": {
+              "name": "Infinite mana creatures you control can produce"
+            }
+          },
+          {
+            "feature": {
+              "name": "Infinite untap of creatures you control"
+            }
+          }
+        ],
+        "notablePrerequisites": "Helm attached to Aurelia.",
+        "popularity": 32399
+      }
+    ],
+    "almostIncludedByAddingColors": []
+  }
+}

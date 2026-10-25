@@ -23,12 +23,23 @@ def cache_path(source: str, key: str, day: date, cache_dir: Path = CACHE_DIR) ->
 
 
 def get_json(url: str, source: str, key: str, cache_dir: Path = CACHE_DIR) -> dict:
-    """Devuelve el JSON de `url`, usando la copia de hoy si ya existe."""
+    """Devuelve el JSON de `url` (GET), usando la copia de hoy si ya existe."""
+    return fetch_cached("GET", url, None, source, key, cache_dir)
+
+
+def post_json(url: str, body: dict, source: str, key: str, cache_dir: Path = CACHE_DIR) -> dict:
+    """Envía `body` a `url` (POST) y devuelve el JSON, usando la copia de hoy si ya existe."""
+    return fetch_cached("POST", url, body, source, key, cache_dir)
+
+
+def fetch_cached(method: str, url: str, body: dict | None, source: str, key: str, cache_dir: Path) -> dict:
+    """Parte común de get_json y post_json."""
     path = cache_path(source, key, date.today(), cache_dir)
     if path.exists():
         return json.loads(path.read_text(encoding="utf-8"))
 
-    response = httpx.get(url, headers={"User-Agent": USER_AGENT}, timeout=30)
+    headers = {"User-Agent": USER_AGENT, "Accept": "application/json"}
+    response = httpx.request(method, url, json=body, headers=headers, timeout=60)
     response.raise_for_status()  # si la fuente responde con error, avisamos
     data = response.json()
 
