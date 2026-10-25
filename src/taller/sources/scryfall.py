@@ -177,6 +177,30 @@ def get_cards(oracle_ids: list[str], db_path: Path = DB_PATH) -> dict[str, Card]
     return {row["oracle_id"]: row_to_card(row) for row in rows}
 
 
+def find_cards_by_name(names: list[str], db_path: Path = DB_PATH) -> dict[str, Card]:
+    """Busca cartas por nombre, sin importar mayúsculas. Devuelve {nombre en minúsculas: Card}.
+
+    Para cartas de dos caras acepta el nombre completo ("A // B") o solo
+    el de la cara frontal ("A"), que es como las exportan algunas páginas.
+    """
+    connection = connect(db_path)
+    found = {}
+    for name in names:
+        # Primero el nombre exacto: así "Plains" no cae en una carta rara "Plains // Plains".
+        row = connection.execute(
+            "SELECT * FROM cards WHERE name = ? COLLATE NOCASE", (name,)
+        ).fetchone()
+        if row is None:
+            row = connection.execute(
+                "SELECT * FROM cards WHERE name LIKE ? AND layout NOT IN ('art_series', 'reversible_card')",
+                (f"{name} // %",),
+            ).fetchone()
+        if row is not None:
+            found[name.lower()] = row_to_card(row)
+    connection.close()
+    return found
+
+
 def row_to_card(row) -> Card:
     """Convierte una fila de SQLite de vuelta en un Card."""
     data = dict(row)
