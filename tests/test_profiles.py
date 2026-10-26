@@ -16,7 +16,7 @@ def test_isshin_profile_loads():
     profile = load_profile("tokens-isshin")
     assert profile.comandante == "Isshin, Two Heavens as One"
     assert profile.archidekt_id == 26390360
-    assert profile.lista_sincronizada is False
+    assert profile.lista_sincronizada is True  # confirmada contra el mazo físico
 
 
 def test_missing_profile_raises(tmp_path):

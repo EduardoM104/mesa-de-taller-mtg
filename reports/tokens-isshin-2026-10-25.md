@@ -7,8 +7,6 @@
 - **Tema:** Mardu de ataques y tokens; Isshin duplica los disparos de ataque
 - **Archidekt:** https://archidekt.com/decks/26390360 (editado 2026-10-24)
 
-> ⚠️ **La lista de Archidekt no está confirmada contra el mazo físico.** Toma este reporte como análisis de la lista, no del mazo que juegas.
-
 ## 1. Resumen
 
 - **Bracket:** nada en la lista rompe bracket 3.

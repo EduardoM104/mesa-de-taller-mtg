@@ -29,7 +29,7 @@ Brief del proyecto para Claude Code (y cualquier otro agente que trabaje en este
 
 El resto de mazos de la carpeta se consideran archivados o teóricos hasta que Martín diga lo contrario.
 
-Ninguna lista está confirmada como idéntica al mazo físico: Martín las revisará una por una. Hasta entonces, `lista_sincronizada: false` en todos los perfiles.
+Martín revisa las listas una por una contra el mazo físico. Confirmadas: Tokens (2026-10-25). Las demás llevan `lista_sincronizada: false` hasta que él las confirme.
 
 ## Repositorio
 

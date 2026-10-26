@@ -6,7 +6,7 @@ comandante: Isshin, Two Heavens as One
 bracket: 3
 bracket_teorico: null
 estado: armado
-lista_sincronizada: false
+lista_sincronizada: true  # confirmada por Martín el 2026-10-25
 tema: Mardu de ataques y tokens; Isshin duplica los disparos de ataque
 plan_de_victoria: Generar tokens al atacar, multiplicar con Isshin y cerrar con anthems o daño al entrar (Impact Tremors, Purphoros)
 ventana_victoria: "turno 5"
