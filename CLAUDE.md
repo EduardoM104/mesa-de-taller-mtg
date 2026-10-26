@@ -74,6 +74,7 @@ Martín está aprendiendo a programar y sabe cosas básicas. Quiere dar seguimie
 ```
 mesa-de-taller-mtg/
 ├── CLAUDE.md
+├── config.toml            # rutas locales, ej. carpeta de ManaBox (no se versiona; plantilla: config.example.toml)
 ├── decks/profiles/        # un YAML por mazo (perfil y objetivos)
 ├── notes/bitacora/        # un .md por mazo con observaciones de partidas
 ├── data/
@@ -100,7 +101,7 @@ mesa-de-taller-mtg/
 | Moxfield | Mazos que comparten otros jugadores (Martín tiene cuenta gratuita) | Su API está protegida por Cloudflare y no se debe evadir. Vía principal: pegar el texto de exportación del mazo. Vía de conveniencia: el endpoint público de Commander Spellbook que acepta una URL de Moxfield |
 | Commander Spellbook | Combos presentes o a una carta de distancia | API pública |
 | EDHREC | Promedios, sinergia, inclusión | No tiene API oficial; usar el JSON público de las páginas con caché de 24 h y pocas peticiones |
-| ManaBox (CSV) | Colección física escaneada | Importar CSV con Scryfall ID, cantidad y ubicación (caja) |
+| ManaBox (CSV) | Colección física escaneada | `taller coleccion importar` toma el CSV más reciente de la carpeta de `config.toml` y reemplaza la colección. Esa carpeta es de solo lectura: nunca escribir, mover ni borrar ahí |
 | Tiendas | Precios para comprar | Ver sección de precios |
 
 Reglas generales:
@@ -176,7 +177,7 @@ Cada fase termina cuando cumple su criterio de terminado. No empezar la siguient
 
 - **Fase 0. Arranque.** Repo en GitHub (privado), `uv`, estructura de carpetas, `pytest` corriendo. *Terminado:* `uv run pytest` pasa con una prueba de ejemplo.
 - **Fase 1. Analizador de mazos.** Comando `taller analizar <slug>` que lee el perfil, trae el mazo de Archidekt, cruza con Scryfall y Spellbook, y escribe el reporte. También acepta un mazo ajeno (texto exportado de Moxfield o URL de Archidekt) para compararlo contra uno propio. *Terminado:* reportes útiles para el mazo de tokens (Isshin) y para DragonSSSS! (Ureni). Aang se cambió por Ureni porque su lista en Archidekt está incompleta (decisión de Martín, 2026-10-25).
-- **Fase 2. Colección.** Importar CSV de ManaBox por caja; las sugerencias marcan "ya la tienes, está en tal caja". *Terminado:* al menos una caja importada y visible en un reporte.
+- **Fase 2. Colección.** Importar CSV de ManaBox por caja; las sugerencias marcan "ya la tienes, está en tal caja". *Terminado:* al menos una caja importada y visible en un reporte. ✅ 2026-10-26 (Orzhov WB en el reporte de Isshin).
 - **Fase 3. Precios.** Precios de referencia y de tiendas mexicanas, lista de compra al mejor costo total. *Terminado:* lista de compra en MXN para las sugerencias de un mazo.
 - **Fase 4. Web.** Consulta de reportes, colección y lista de compra desde iPhone, iPad y la Mac del trabajo. *Terminado:* accesible con login desde el iPhone.
 - **Fase 5. Simulación y bitácora.** Simulación de partidas en solitario para estimar la ventana de victoria (prioridad: Aang en turno 3–4) e integración de la bitácora de partidas en los reportes.

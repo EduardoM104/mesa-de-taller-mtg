@@ -1,6 +1,6 @@
 """Junta todas las piezas del análisis de un mazo en un solo objeto.
 
-Orden: perfil → Archidekt → Scryfall → roles, maná y bracket → Spellbook.
+Orden: perfil → Archidekt → Scryfall → roles, maná y bracket → Spellbook → colección.
 Si Spellbook falla, el análisis sigue sin combos (regla de CLAUDE.md:
 si una fuente falla, el resto debe seguir funcionando).
 """
@@ -11,8 +11,10 @@ from dataclasses import dataclass, field
 import httpx
 
 from taller.analysis import bracket, mana
+from taller.analysis.collection import Owned, fitting_entries
 from taller.analysis.pairing import Entry, pair_cards
 from taller.analysis.roles import REFERENCES, group_by_role, references_for
+from taller.collection.store import collection_info, owned_by_oracle
 from taller.profiles import DeckProfile
 from taller.sources.archidekt import Deck, fetch_deck
 from taller.sources.scryfall import get_cards, update_cards
@@ -41,6 +43,10 @@ class DeckAnalysis:
     combos: dict[str, list[Combo]] | None  # None si Spellbook no respondió
     # Rangos por rol: los generales, o los del perfil si los define.
     references: dict[str, tuple[int, int]] = field(default_factory=lambda: dict(REFERENCES))
+    # Colección: dónde está cada carta que tienes, y las que caben en el mazo sin estar en él.
+    owned: Owned = field(default_factory=dict)
+    collection_entries: list[Entry] = field(default_factory=list)
+    collection: dict | None = None  # total, archivo y fecha; None si no hay colección
 
 
 def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
@@ -66,6 +72,9 @@ def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
 
     curve = mana.mana_curve(entries)
     identity = mana.deck_identity(entries)
+    owned = owned_by_oracle()
+    in_deck = set(all_ids)
+    collection_entries = fitting_entries(get_cards(list(owned)), identity, in_deck) if owned else []
     return DeckAnalysis(
         profile=profile,
         deck=deck,
@@ -84,6 +93,9 @@ def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
         warnings=warnings,
         combos=combos,
         references=references_for(profile.referencias),
+        owned=owned,
+        collection_entries=collection_entries,
+        collection=collection_info(),
     )
 
 

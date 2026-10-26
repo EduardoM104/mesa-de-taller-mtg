@@ -3,6 +3,7 @@
 from datetime import date
 
 from taller.analysis.bracket import MAX_GAME_CHANGERS
+from taller.analysis.collection import with_location
 from taller.analysis.compare import Comparison
 from taller.analysis.report import ROLE_TITLES, format_range, names
 
@@ -60,12 +61,19 @@ def roles_table(comparison: Comparison) -> list[str]:
     return lines
 
 
+def theirs_with_location(comparison: Comparison, card_names: list[str]) -> list[str]:
+    """Nombres de su lista con su ubicación si ya los tienes en tu colección."""
+    oracle_by_name = {deck_card.name: deck_card.oracle_id for deck_card, _ in comparison.other_entries}
+    return [with_location(name, oracle_by_name.get(name), comparison.own.owned) for name in card_names]
+
+
 def gaps_section(comparison: Comparison) -> list[str]:
     lines = ["## 2. Sus cartas que cubren tus huecos", ""]
     if not comparison.fills_gaps:
         return lines + ["Tu mazo no tiene roles por debajo de la referencia."]
     for role, card_names in comparison.fills_gaps.items():
-        lines.append(f"- **{ROLE_TITLES[role]}** (tienes {len(comparison.own.roles[role])}): {names(card_names)}")
+        located = theirs_with_location(comparison, card_names)
+        lines.append(f"- **{ROLE_TITLES[role]}** (tienes {len(comparison.own.roles[role])}): {names(located)}")
     return lines
 
 
@@ -78,9 +86,9 @@ def only_theirs_section(comparison: Comparison) -> list[str]:
         in_role = [name for name in comparison.other_roles[role] if name in only_theirs]
         placed.update(in_role)
         if in_role:
-            lines.append(f"- **{title}:** {names(in_role)}")
+            lines.append(f"- **{title}:** {names(theirs_with_location(comparison, in_role))}")
     others = [name for name in comparison.only_theirs if name not in placed]
-    lines.append(f"- **Sin rol detectado / tierras:** {names(others)}")
+    lines.append(f"- **Sin rol detectado / tierras:** {names(theirs_with_location(comparison, others))}")
     return lines
 
 

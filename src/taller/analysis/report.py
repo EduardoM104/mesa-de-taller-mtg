@@ -8,7 +8,9 @@ from datetime import date
 
 from taller.analysis.analyze import DeckAnalysis, target_turn
 from taller.analysis.bracket import MAX_GAME_CHANGERS
+from taller.analysis.collection import with_location
 from taller.analysis.pairing import is_land
+from taller.analysis.roles import group_by_role
 
 ROLE_TITLES = {
     "ramp": "Ramp",
@@ -102,6 +104,25 @@ def has_theme_type(type_line: str, theme_types: list[str]) -> bool:
     return any(theme_type in words for theme_type in theme_types)
 
 
+def collection_text(info: dict | None) -> str:
+    """Línea del encabezado: qué colección se usó para las sugerencias."""
+    if info is None:
+        return "sin importar (`taller coleccion importar`)"
+    return f"{info['total']} cartas ({info['source']}, importada {info['imported_at'][:10]})"
+
+
+def maybe_with_location(analysis: DeckAnalysis, card_names: list[str]) -> list[str]:
+    """Nombres del Maybeboard con su ubicación si ya los tienes."""
+    oracle_by_name = {deck_card.name: deck_card.oracle_id for deck_card, _ in analysis.maybe_entries}
+    return [with_location(name, oracle_by_name.get(name), analysis.owned) for name in card_names]
+
+
+def collection_with_location(analysis: DeckAnalysis, card_names: list[str]) -> list[str]:
+    """Nombres de cartas de la colección con su ubicación."""
+    oracle_by_name = {deck_card.name: deck_card.oracle_id for deck_card, _ in analysis.collection_entries}
+    return [with_location(name, oracle_by_name[name], analysis.owned) for name in card_names]
+
+
 # ---------- Secciones ----------
 
 
@@ -117,6 +138,7 @@ def header(analysis: DeckAnalysis) -> list[str]:
         f"- **Tema:** {profile.tema}",
         f"- **Archidekt:** https://archidekt.com/decks/{deck.archidekt_id} (editado {deck.updated_at[:10]})",
     ]
+    lines.append(f"- **Colección:** {collection_text(analysis.collection)}")
     if not profile.lista_sincronizada:
         lines += ["", "> ⚠️ **La lista de Archidekt no está confirmada contra el mazo físico.** "
                       "Toma este reporte como análisis de la lista, no del mazo que juegas."]
@@ -262,11 +284,15 @@ def synergy_section(analysis: DeckAnalysis) -> list[str]:
 
 def suggestions_section(analysis: DeckAnalysis) -> list[str]:
     lines = ["## 7. Sugerencias", ""]
+    collection_roles = group_by_role(analysis.collection_entries)
     for role in roles_below(analysis):
         low, high = analysis.references[role]
-        candidates = analysis.maybe_roles[role]
+        candidates = maybe_with_location(analysis, analysis.maybe_roles[role])
         source = f"En tu Maybeboard: {names(candidates)}." if candidates else "Nada en tu Maybeboard cubre este rol."
         lines.append(f"- **Sube {ROLE_TITLES[role].lower()}** ({len(analysis.roles[role])}, referencia {low}–{high}). {source}")
+        owned = collection_with_location(analysis, collection_roles[role])
+        if owned:
+            lines.append(f"  - En tu colección (detectadas por texto, revisa que encajen): {names(owned)}")
 
     for role, (low, high) in analysis.references.items():
         count = len(analysis.roles[role])
@@ -286,7 +312,7 @@ def suggestions_section(analysis: DeckAnalysis) -> list[str]:
             lines.append(f"- **Evita agregar** si quieres quedarte en bracket {analysis.profile.bracket} "
                          f"(completarían un combo de dos cartas): {names(risky)}")
 
-    lines.append("- *Prioridad por colección y precio: llega en las fases 2 y 3.*")
+    lines.append("- *Prioridad por precio: llega en la fase 3.*")
     return lines
 
 

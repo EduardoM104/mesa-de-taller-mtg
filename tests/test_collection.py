@@ -4,9 +4,12 @@ import os
 
 import pytest
 
+from taller.analysis.collection import fitting_entries, with_location
 from taller.collection.manabox import count_by_binder, latest_csv, read_csv
-from taller.collection.store import collection_size, replace_collection
+from taller.collection.store import collection_info, collection_size, owned_by_oracle, replace_collection
 from taller.config import load_config, manabox_dir
+
+from helpers import make_entry
 
 HEADER = (
     "Binder Name,Binder Type,Name,Set code,Set name,Collector number,Foil,Rarity,Quantity,"
@@ -82,3 +85,39 @@ def test_import_replaces_whole_collection(tmp_path):
     # Segunda importación con una sola carta: la anterior desaparece, no se suma.
     replace_collection(cards[:1], {}, "b.csv", db_path)
     assert collection_size(db_path) == 1
+
+
+def test_owned_groups_binders_and_skips_lists(tmp_path):
+    db_path = tmp_path / "taller.db"
+    rows = ROWS + (
+        "Golgari - GB,binder,Beckon Apparition,UMA,Ultimate Masters,211,normal,common,1,43310,"
+        "396bdd5f-2aad-48ba-a4b1-f2b2365a1a53,0.29,false,false,false,near_mint,en,false,USD,2026-10-26\n"
+        "Deseos,list,Jarad, Golgari Lich Lord,TDC,x,1,normal,mythic,1,1,y,0,false,false,false,nm,en,false,USD,2026\n"
+    ).replace("Jarad, Golgari Lich Lord,TDC,x", '"Jarad, Golgari Lich Lord",TDC,x')
+    cards = read_csv(write_csv(tmp_path / "a.csv", rows))
+    oracle_ids = {"jarad, golgari lich lord": "jarad-id", "beckon apparition": "beckon-id"}
+    replace_collection(cards, oracle_ids, "a.csv", db_path)
+
+    owned = owned_by_oracle(db_path)
+    assert owned["beckon-id"] == {"Golgari - GB": 1, "Orzhov WB": 2}
+    assert owned["jarad-id"] == {"Golgari - GB": 1}  # la copia de la lista de deseos no cuenta
+
+
+def test_collection_info_is_none_when_empty(tmp_path):
+    assert collection_info(tmp_path / "taller.db") is None
+
+
+def test_with_location_formats_binders():
+    owned = {"beckon-id": {"Golgari - GB": 1, "Orzhov WB": 2}}
+    assert with_location("Beckon Apparition", "beckon-id", owned) == \
+        "Beckon Apparition (la tienes: Golgari - GB, Orzhov WB ×2)"
+    assert with_location("Sol Ring", "sol-id", owned) == "Sol Ring"
+
+
+def test_fitting_entries_respects_identity_and_deck():
+    _, in_colors = make_entry("Corpse Knight", identity=["W", "B"])
+    _, off_colors = make_entry("Llanowar Elves", identity=["G"])
+    _, in_deck = make_entry("Sol Ring")
+    cards = {card.oracle_id: card for card in (in_colors, off_colors, in_deck)}
+    entries = fitting_entries(cards, identity=["W", "B", "R"], exclude={"Sol Ring"})
+    assert [deck_card.name for deck_card, _ in entries] == ["Corpse Knight"]

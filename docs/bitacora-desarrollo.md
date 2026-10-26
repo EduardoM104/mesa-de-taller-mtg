@@ -91,3 +91,28 @@
 
 - **Fase 2: colección.** Importar un CSV de ManaBox por caja y que las sugerencias digan "ya la tienes, está en tal caja".
 - Pendiente cuando haya lista: perfil y reporte de Aang.
+
+## 2026-10-26 — Fase 2: colección
+
+### Qué se hizo
+
+- **`config.toml`** (no se versiona; plantilla en `config.example.toml`): guarda la carpeta de exportaciones de ManaBox, `/Users/martrod104/Documents/MTG Archive`. La ruta vive en configuración, no en el código.
+- **`taller coleccion importar`:** sin argumentos toma el CSV más reciente de esa carpeta y reemplaza la colección completa en una sola transacción. La carpeta es de solo lectura para el taller: solo se lista y se abre en modo lectura (hay una prueba que lo revisa).
+- Cada carta se guarda con su `oracle_id` (buscado por nombre en Scryfall) para cruzarla con los mazos. Los binders de tipo `list` (listas de deseos en ManaBox) no cuentan como cartas que tienes.
+- **Reportes:** el encabezado dice qué colección se usó; en Sugerencias, el Maybeboard y las cartas de la colección que cubren un rol bajo dicen dónde están ("la tienes: Orzhov WB"). La comparación marca las cartas ajenas que ya tienes.
+- Primera importación: 22 cartas (Orzhov WB y Golgari - GB). En el reporte de Isshin aparece Frodo, Adventurous Hobbit (Orzhov WB) como opción de robo.
+
+69 pruebas pasando.
+
+### Qué aprendimos
+
+- Separar configuración (rutas de esta Mac) del código: `tomllib` viene con Python y lee TOML sin instalar nada.
+- `pathlib.Path` maneja rutas con espacios sin problema mientras no pasen por la terminal.
+- "Reemplazar todo" con `DELETE` + inserciones dentro de `with connection:` es todo o nada: si algo falla, queda la colección anterior.
+- Las cartas de la colección no traen etiquetas de Tagger: sus roles salen del texto y son aproximados, así que el reporte lo dice.
+
+### Qué sigue
+
+- Pieza para Martín: la prueba de que `latest_csv` ignora archivos que no son `.csv`.
+- Escanear más cajas en ManaBox y reimportar; con más colores habrá sugerencias para Ureni (hoy no hay cartas Temur en la colección).
+- **Fase 3: precios.**

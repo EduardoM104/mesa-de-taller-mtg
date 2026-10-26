@@ -63,3 +63,36 @@ def collection_size(db_path: Path = DB_PATH) -> int:
     row = connection.execute("SELECT COALESCE(SUM(quantity), 0) AS total FROM collection").fetchone()
     connection.close()
     return row["total"]
+
+
+def owned_by_oracle(db_path: Path = DB_PATH) -> dict[str, dict[str, int]]:
+    """Qué cartas tienes y dónde: {oracle_id: {binder: copias}}.
+
+    Se ignoran los binders de tipo "list": en ManaBox son listas de deseos,
+    no cartas que tengas.
+    """
+    connection = connect(db_path)
+    connection.execute(CREATE_TABLE)
+    rows = connection.execute(
+        "SELECT oracle_id, binder, SUM(quantity) AS copies FROM collection "
+        "WHERE oracle_id IS NOT NULL AND binder_type != 'list' "
+        "GROUP BY oracle_id, binder ORDER BY binder"
+    ).fetchall()
+    connection.close()
+    owned = {}
+    for row in rows:
+        owned.setdefault(row["oracle_id"], {})[row["binder"]] = row["copies"]
+    return owned
+
+
+def collection_info(db_path: Path = DB_PATH) -> dict | None:
+    """Total de cartas, archivo y fecha de la última importación; None si no hay colección."""
+    total = collection_size(db_path)
+    if total == 0:
+        return None
+    connection = connect(db_path)
+    rows = connection.execute("SELECT key, value FROM meta WHERE key LIKE 'collection_%'").fetchall()
+    connection.close()
+    meta = {row["key"]: row["value"] for row in rows}
+    return {"total": total, "source": meta.get("collection_source"),
+            "imported_at": meta.get("collection_imported_at")}

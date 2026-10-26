@@ -82,3 +82,24 @@ def test_theme_type_matches_creature_subtype():
 def test_tutors_are_not_candidates_to_cut():
     entries = ENTRIES + [make_entry("Worldly Tutor", type_line="Instant", tags=["tutor-creature"])]
     assert "Worldly Tutor" not in nonland_without_role(build_analysis(entries))
+
+
+def test_suggestions_show_where_you_have_the_card():
+    # Robo está abajo; Mentor está en el Maybeboard y en tu colección, en Orzhov WB.
+    maybe = [make_entry("Mentor of the Meek", type_line="Creature", tags=["repeatable pure draw"])]
+    analysis = build_analysis(ENTRIES, maybe_entries=maybe)
+    analysis.owned = {"Mentor of the Meek": {"Orzhov WB": 1}}
+    assert "Mentor of the Meek (la tienes: Orzhov WB)" in render(analysis)
+
+
+def test_collection_cards_fill_low_roles():
+    owned_card = make_entry("Night's Whisper", type_line="Sorcery", text="You draw two cards and you lose 2 life.")
+    analysis = build_analysis(ENTRIES)
+    analysis.owned = {"Night's Whisper": {"Mono negro": 2}}
+    analysis.collection_entries = [owned_card]
+    assert "En tu colección (detectadas por texto, revisa que encajen): Night's Whisper (la tienes: Mono negro ×2)" \
+        in render(analysis)
+
+
+def test_header_says_when_collection_is_missing():
+    assert "sin importar" in render(build_analysis(ENTRIES))
