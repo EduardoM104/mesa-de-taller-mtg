@@ -12,7 +12,7 @@
 - **Bracket:** nada en la lista rompe bracket 3.
 - **Por debajo de la referencia:** robo (7 de 10–12); wipes (1 de 2–4).
 - **Maná:** 34 tierras, costo promedio 3.0, 11 piezas de ramp.
-- **Plan:** 23 cartas de tokens y 15 de cierre.
+- **Plan:** 19 piezas del tema.
 - **Para ganar en turno 5, el cuello de botella es el robo:** sin cartas suficientes, el plan no llega completo a tiempo.
 
 ## 2. Roles
@@ -90,7 +90,7 @@ Fuente: Commander Spellbook.
 
 ## 6. Sinergia con el tema
 
-- **Piezas del tema** (etiquetas: attack trigger; 19): All-Out Assault · Brutal Hordechief · Infantry Shield · Within Range · Krenko, Tin Street Kingpin · Neriv, Crackling Vanguard · Redoubled Stormsinger · Zurgo, Thunder's Decree · Ironwill Forger · Aurelia, the Warleader · Hero of Bladehold · Zurgo Stormrender · Hellrider · Adeline, Resplendent Cathar · Anim Pakal, Thousandth Moon · Ainok Strike Leader · Mardu Siegebreaker · Commissar Severina Raine · Goblin Rabblemaster
+- **Piezas del tema** (attack trigger; 19): All-Out Assault · Brutal Hordechief · Infantry Shield · Within Range · Krenko, Tin Street Kingpin · Neriv, Crackling Vanguard · Redoubled Stormsinger · Zurgo, Thunder's Decree · Ironwill Forger · Aurelia, the Warleader · Hero of Bladehold · Zurgo Stormrender · Hellrider · Adeline, Resplendent Cathar · Anim Pakal, Thousandth Moon · Ainok Strike Leader · Mardu Siegebreaker · Commissar Severina Raine · Goblin Rabblemaster
 - **Empujan el plan (tokens o cierre; 35):** Adeline, Resplendent Cathar · Ainok Strike Leader · All-Out Assault · Anim Pakal, Thousandth Moon · Assemble the Legion · Aurelia, the Warleader · Bastion of Remembrance · Brutal Hordechief · Call the Coppercoats · Commissar Severina Raine · Crackling Doom · Divine Visitation · Elas il-Kor, Sadistic Pilgrim · Goblin Rabblemaster · Grand Crescendo · Hero of Bladehold · Impact Tremors · Infantry Shield · Iroas, God of Victory · Kambal, Profiteering Mayor · Kaya, Geist Hunter · Krenko, Tin Street Kingpin · Mardu Siegebreaker · Martial Coup · Mirkwood Bats · Mondrak, Glory Dominus · Ocelot Pride · Purphoros, God of the Forge · Redoubled Stormsinger · Thunder of Unity · Will of the Mardu · Windcrag Siege · Within Range · Zurgo Stormrender · Zurgo, Thunder's Decree
 - **Sin rol detectado:** Smile at Death · Corrupted Conviction · Ogre Battledriver · Faithless Looting
 

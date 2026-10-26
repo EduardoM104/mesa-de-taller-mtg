@@ -1,7 +1,9 @@
 """Pruebas del análisis (roles, maná, bracket) con cartas armadas a mano."""
 
+import pytest
+
 from taller.analysis import bracket, mana
-from taller.analysis.roles import card_roles
+from taller.analysis.roles import card_roles, references_for
 
 from helpers import make_entry
 
@@ -87,3 +89,36 @@ def test_too_many_game_changers_warns():
     assert bracket.bracket_warnings(findings, target=3) == [
         "4 Game Changers; bracket 3 permite máximo 3."
     ]
+
+
+def test_land_ramp_is_ramp_not_tutor():
+    cultivate = make_entry("Cultivate", type_line="Sorcery",
+                           tags=["land ramp", "tutor-land-basic", "tutor-land-to-battlefield", "tutor-to-hand"])
+    assert card_roles(cultivate) == ["ramp"]
+    assert bracket.is_tutor(cultivate) is False
+
+
+def test_fetchland_is_not_a_tutor():
+    fetch = make_entry("Misty Rainforest", type_line="Land", tags=["tutor-land-forest", "tutor-land-island"])
+    assert bracket.is_tutor(fetch) is False
+
+
+def test_creature_tutor_is_a_tutor():
+    worldly = make_entry("Worldly Tutor", type_line="Instant", tags=["tutor-creature", "tutor-to-top"])
+    assert bracket.is_tutor(worldly) is True
+
+
+def test_soft_counterspell_is_removal():
+    rupture = make_entry("Spell Rupture", type_line="Instant", tags=["counterspell-soft"])
+    assert card_roles(rupture) == ["removal"]
+
+
+def test_profile_references_override_defaults():
+    merged = references_for({"ramp": (16, 20)})
+    assert merged["ramp"] == (16, 20)
+    assert merged["robo"] == (10, 12)  # los demás roles quedan igual
+
+
+def test_unknown_role_in_references_raises():
+    with pytest.raises(ValueError):
+        references_for({"rampa": (16, 20)})

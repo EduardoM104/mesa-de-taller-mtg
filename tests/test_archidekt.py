@@ -7,6 +7,9 @@ import json
 from datetime import date
 from pathlib import Path
 
+import httpx
+import pytest
+
 from taller.sources.archidekt import parse_deck
 from taller.sources.cache import cache_path, get_json
 
@@ -49,3 +52,13 @@ def test_get_json_uses_todays_cache(tmp_path):
 
     data = get_json("https://no-existe.invalid/", "archidekt", "123", cache_dir=tmp_path)
     assert data == {"ok": True}
+
+
+def test_refresh_ignores_todays_cache(tmp_path):
+    # Con refresh=True no debe usar la copia: intenta descargar y falla con la URL falsa.
+    path = cache_path("archidekt", "123", date.today(), cache_dir=tmp_path)
+    path.parent.mkdir(parents=True)
+    path.write_text('{"ok": true}', encoding="utf-8")
+
+    with pytest.raises(httpx.HTTPError):
+        get_json("https://no-existe.invalid/", "archidekt", "123", cache_dir=tmp_path, refresh=True)

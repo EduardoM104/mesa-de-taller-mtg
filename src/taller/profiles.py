@@ -31,6 +31,10 @@ class DeckProfile(BaseModel):
     restricciones: list[str] = []
     # Etiquetas de Scryfall Tagger que marcan las piezas del tema (ej. "attack trigger").
     etiquetas_tema: list[str] = []
+    # Tipos de criatura del tema (ej. "Dragon"): esas cartas también son piezas del tema.
+    tipos_tema: list[str] = []
+    # Rangos propios por rol, si el mazo justifica otros (ej. ramp: [16, 20]).
+    referencias: dict[str, tuple[int, int]] = {}
     presupuesto_mxn: float | None = None
     notas: str = ""
 

@@ -29,7 +29,7 @@ Brief del proyecto para Claude Code (y cualquier otro agente que trabaje en este
 
 El resto de mazos de la carpeta se consideran archivados o teóricos hasta que Martín diga lo contrario.
 
-Martín revisa las listas una por una contra el mazo físico. Confirmadas: Tokens (2026-10-25). Las demás llevan `lista_sincronizada: false` hasta que él las confirme.
+Martín revisa las listas una por una contra el mazo físico. Confirmadas: Tokens y DragonSSSS! (2026-10-25). Las demás llevan `lista_sincronizada: false` hasta que él las confirme.
 
 ## Repositorio
 
@@ -129,8 +129,12 @@ ventana_victoria: "turno 7-9"
 restricciones:
   - Mantener la temática zombie aunque cueste algo de potencia
   - Sin Game Changers
+tipos_tema:                # tipos de criatura del tema
+  - Zombie
 etiquetas_tema:            # etiquetas de Scryfall Tagger que marcan las piezas del tema
   - repeatable creature tokens
+referencias:               # opcional: rangos propios por rol (ramp, robo, removal, wipes, protección)
+  ramp: [10, 12]
 presupuesto_mxn: null
 notas: ""
 ```
@@ -171,7 +175,7 @@ Un reporte en Markdown en `reports/` que siempre compara contra el perfil:
 Cada fase termina cuando cumple su criterio de terminado. No empezar la siguiente sin cerrar la anterior.
 
 - **Fase 0. Arranque.** Repo en GitHub (privado), `uv`, estructura de carpetas, `pytest` corriendo. *Terminado:* `uv run pytest` pasa con una prueba de ejemplo.
-- **Fase 1. Analizador de mazos.** Comando `taller analizar <slug>` que lee el perfil, trae el mazo de Archidekt, cruza con Scryfall y Spellbook, y escribe el reporte. También acepta un mazo ajeno (texto exportado de Moxfield o URL de Archidekt) para compararlo contra uno propio. *Terminado:* reportes útiles para el mazo de tokens (Isshin) y para Aang.
+- **Fase 1. Analizador de mazos.** Comando `taller analizar <slug>` que lee el perfil, trae el mazo de Archidekt, cruza con Scryfall y Spellbook, y escribe el reporte. También acepta un mazo ajeno (texto exportado de Moxfield o URL de Archidekt) para compararlo contra uno propio. *Terminado:* reportes útiles para el mazo de tokens (Isshin) y para DragonSSSS! (Ureni). Aang se cambió por Ureni porque su lista en Archidekt está incompleta (decisión de Martín, 2026-10-25).
 - **Fase 2. Colección.** Importar CSV de ManaBox por caja; las sugerencias marcan "ya la tienes, está en tal caja". *Terminado:* al menos una caja importada y visible en un reporte.
 - **Fase 3. Precios.** Precios de referencia y de tiendas mexicanas, lista de compra al mejor costo total. *Terminado:* lista de compra en MXN para las sugerencias de un mazo.
 - **Fase 4. Web.** Consulta de reportes, colección y lista de compra desde iPhone, iPad y la Mac del trabajo. *Terminado:* accesible con login desde el iPhone.

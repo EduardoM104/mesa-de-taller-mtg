@@ -1,0 +1,30 @@
+# Perfil del mazo DragonSSSS!. Bracket, ventana y lista confirmados por Martín (2026-10-25).
+# Tema y plan deducidos de la lista de Archidekt.
+slug: dragones-ureni
+archidekt_id: 21296260
+nombre: DragonSSSS!
+comandante: Ureni of the Unwritten
+bracket: 4
+bracket_teorico: null
+estado: armado
+lista_sincronizada: true  # confirmada por Martín el 2026-10-25
+tema: Dragones Temur; rampear y poner dragones grandes sin pagar su costo
+plan_de_victoria: Rampear o hacer trampa (Sneak Attack, See the Unwritten, Tooth and Nail, Birthing Pod) para sacar dragones temprano y cerrar con daño al entrar (Terror of the Peaks, Dragon Tempest, Scourge of Valkas)
+ventana_victoria: "turno 4-5"
+restricciones:
+  - Ganar en turno 4-5 de forma consistente
+# Piezas del tema: los dragones, lo que los apoya, lo que los mete sin pagar
+# y lo que duplica sus disparos al entrar.
+tipos_tema:
+  - Dragon
+etiquetas_tema:
+  - typal-dragon
+  - sneak-creature
+  - tutor-to-battlefield
+  - impulse-onto-battlefield
+  - trigger doubler
+# Mazo de ramp: la referencia general (10-12) se queda corta.
+referencias:
+  ramp: [16, 20]
+presupuesto_mxn: null
+notas: ""

@@ -4,8 +4,7 @@ from datetime import date
 
 from taller.analysis.bracket import MAX_GAME_CHANGERS
 from taller.analysis.compare import Comparison
-from taller.analysis.report import ROLE_TITLES, names
-from taller.analysis.roles import REFERENCES
+from taller.analysis.report import ROLE_TITLES, format_range, names
 
 
 def render_comparison(comparison: Comparison) -> str:
@@ -56,7 +55,7 @@ def roles_table(comparison: Comparison) -> list[str]:
         f"| Costo promedio | {own.average_cmc} | {comparison.other_average_cmc} | — |",
     ]
     for role, title in ROLE_TITLES.items():
-        reference = "–".join(str(n) for n in REFERENCES[role]) if role in REFERENCES else "—"
+        reference = format_range(own.references.get(role))
         lines.append(f"| {title} | {len(own.roles[role])} | {len(comparison.other_roles[role])} | {reference} |")
     return lines
 

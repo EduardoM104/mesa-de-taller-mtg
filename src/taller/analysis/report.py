@@ -9,7 +9,6 @@ from datetime import date
 from taller.analysis.analyze import DeckAnalysis, target_turn
 from taller.analysis.bracket import MAX_GAME_CHANGERS
 from taller.analysis.pairing import is_land
-from taller.analysis.roles import REFERENCES
 
 ROLE_TITLES = {
     "ramp": "Ramp",
@@ -55,14 +54,19 @@ def names(card_names: list[str]) -> str:
 
 def roles_below(analysis: DeckAnalysis) -> list[str]:
     """Roles con menos cartas que el mínimo de referencia."""
-    return [role for role, (low, _) in REFERENCES.items() if len(analysis.roles[role]) < low]
+    return [role for role, (low, _) in analysis.references.items() if len(analysis.roles[role]) < low]
 
 
-def role_status(count: int, role: str) -> str:
+def format_range(reference: tuple[int, int] | None) -> str:
+    """(10, 12) → "10–12"; sin referencia → "—"."""
+    return f"{reference[0]}–{reference[1]}" if reference else "—"
+
+
+def role_status(count: int, reference: tuple[int, int] | None) -> str:
     """✅ dentro del rango, ⬇️ abajo, ⬆️ arriba, — si no hay referencia."""
-    if role not in REFERENCES:
+    if reference is None:
         return "—"
-    low, high = REFERENCES[role]
+    low, high = reference
     if count < low:
         return "⬇️ abajo"
     if count > high:
@@ -71,9 +75,10 @@ def role_status(count: int, role: str) -> str:
 
 
 def nonland_without_role(analysis: DeckAnalysis) -> list[str]:
-    """Cartas que no son tierra, comandante ni pieza del tema, y no tienen rol detectado."""
+    """Cartas que no son tierra, comandante, tutor ni pieza del tema, y no tienen rol detectado."""
     with_role = {name for card_names in analysis.roles.values() for name in card_names}
     with_role.update(theme_pieces(analysis))
+    with_role.update(analysis.findings["tutores"])
     return [
         deck_card.name
         for deck_card, card in analysis.entries
@@ -82,9 +87,19 @@ def nonland_without_role(analysis: DeckAnalysis) -> list[str]:
 
 
 def theme_pieces(analysis: DeckAnalysis) -> list[str]:
-    """Cartas con alguna de las etiquetas del tema que define el perfil."""
-    wanted = set(analysis.profile.etiquetas_tema)
-    return [deck_card.name for deck_card, _ in analysis.entries if wanted & set(deck_card.tags)]
+    """Cartas con alguna etiqueta o tipo del tema que define el perfil."""
+    wanted_tags = set(analysis.profile.etiquetas_tema)
+    return [
+        deck_card.name
+        for deck_card, card in analysis.entries
+        if wanted_tags & set(deck_card.tags) or has_theme_type(card.type_line, analysis.profile.tipos_tema)
+    ]
+
+
+def has_theme_type(type_line: str, theme_types: list[str]) -> bool:
+    """¿La línea de tipo trae alguno de los tipos del tema? "Creature — Dragon" → Dragon."""
+    words = type_line.replace("—", " ").replace("//", " ").split()
+    return any(theme_type in words for theme_type in theme_types)
 
 
 # ---------- Secciones ----------
@@ -123,15 +138,22 @@ def summary(analysis: DeckAnalysis) -> list[str]:
 
     below = roles_below(analysis)
     if below:
-        detail = "; ".join(f"{role} ({len(analysis.roles[role])} de {REFERENCES[role][0]}–{REFERENCES[role][1]})" for role in below)
+        detail = "; ".join(f"{role} ({len(analysis.roles[role])} de {format_range(analysis.references[role])})"
+                           for role in below)
         lines.append(f"- **Por debajo de la referencia:** {detail}.")
     else:
         lines.append("- **Roles:** todos dentro o arriba de la referencia.")
 
     lines.append(f"- **Maná:** {analysis.lands} tierras, costo promedio {analysis.average_cmc}, "
                  f"{len(analysis.roles['ramp'])} piezas de ramp.")
-    lines.append(f"- **Plan:** {len(analysis.roles['tokens'])} cartas de tokens y "
-                 f"{len(analysis.roles['cierre'])} de cierre.")
+    if profile.tipos_tema or profile.etiquetas_tema:
+        lines.append(f"- **Plan:** {len(theme_pieces(analysis))} piezas del tema.")
+    else:
+        lines.append(f"- **Plan:** {len(analysis.roles['tokens'])} cartas de tokens y "
+                     f"{len(analysis.roles['cierre'])} de cierre.")
+    if analysis.combos and analysis.combos["presentes"] and (profile.bracket or 3) >= 4:
+        lines.append(f"- **Combos:** {len(analysis.combos['presentes'])} presentes; son una ruta de victoria "
+                     "alterna (ver sección 5).")
     if "robo" in below and (target_turn(profile.ventana_victoria) or 99) <= 5:
         lines.append(f"- **Para ganar en {profile.ventana_victoria}, el cuello de botella es el robo:** "
                      "sin cartas suficientes, el plan no llega completo a tiempo.")
@@ -149,8 +171,8 @@ def roles_section(analysis: DeckAnalysis) -> list[str]:
     ]
     for role, title in ROLE_TITLES.items():
         count = len(analysis.roles[role])
-        reference = "–".join(str(n) for n in REFERENCES[role]) if role in REFERENCES else "—"
-        lines.append(f"| {title} | {count} | {reference} | {role_status(count, role)} |")
+        reference = analysis.references.get(role)
+        lines.append(f"| {title} | {count} | {format_range(reference)} | {role_status(count, reference)} |")
     lines.append("")
     for role, title in ROLE_TITLES.items():
         lines.append(f"- **{title}:** {names(analysis.roles[role])}")
@@ -226,12 +248,12 @@ def combos_section(analysis: DeckAnalysis) -> list[str]:
 
 def synergy_section(analysis: DeckAnalysis) -> list[str]:
     lines = ["## 6. Sinergia con el tema", ""]
-    tags = analysis.profile.etiquetas_tema
-    if tags:
+    criteria = analysis.profile.tipos_tema + analysis.profile.etiquetas_tema
+    if criteria:
         pieces = theme_pieces(analysis)
-        lines.append(f"- **Piezas del tema** (etiquetas: {', '.join(tags)}; {len(pieces)}): {names(pieces)}")
+        lines.append(f"- **Piezas del tema** ({', '.join(criteria)}; {len(pieces)}): {names(pieces)}")
     else:
-        lines.append("- El perfil no define `etiquetas_tema`; se usan los roles de tokens y cierre.")
+        lines.append("- El perfil no define `tipos_tema` ni `etiquetas_tema`; se usan los roles de tokens y cierre.")
     pushers = sorted(set(analysis.roles["tokens"]) | set(analysis.roles["cierre"]))
     lines.append(f"- **Empujan el plan (tokens o cierre; {len(pushers)}):** {names(pushers)}")
     lines.append(f"- **Sin rol detectado:** {names(nonland_without_role(analysis))}")
@@ -241,12 +263,12 @@ def synergy_section(analysis: DeckAnalysis) -> list[str]:
 def suggestions_section(analysis: DeckAnalysis) -> list[str]:
     lines = ["## 7. Sugerencias", ""]
     for role in roles_below(analysis):
-        low, high = REFERENCES[role]
+        low, high = analysis.references[role]
         candidates = analysis.maybe_roles[role]
         source = f"En tu Maybeboard: {names(candidates)}." if candidates else "Nada en tu Maybeboard cubre este rol."
         lines.append(f"- **Sube {ROLE_TITLES[role].lower()}** ({len(analysis.roles[role])}, referencia {low}–{high}). {source}")
 
-    for role, (low, high) in REFERENCES.items():
+    for role, (low, high) in analysis.references.items():
         count = len(analysis.roles[role])
         if count > high:
             lines.append(f"- **{ROLE_TITLES[role]} tiene margen** ({count}, referencia {low}–{high}): "

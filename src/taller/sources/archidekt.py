@@ -38,9 +38,14 @@ class Deck(BaseModel):
         return sum(card.quantity for card in self.mainboard)
 
 
-def fetch_deck(deck_id: int) -> Deck:
-    """Descarga (o lee de caché) el mazo y lo convierte en un Deck."""
-    raw = get_json(API_URL.format(deck_id=deck_id), source="archidekt", key=str(deck_id))
+def fetch_deck(deck_id: int, refresh: bool = False) -> Deck:
+    """Descarga (o lee de caché) el mazo y lo convierte en un Deck.
+
+    Con refresh=True se descarga de nuevo aunque ya haya copia de hoy
+    (útil si editaste el mazo en Archidekt hoy mismo).
+    """
+    url = API_URL.format(deck_id=deck_id)
+    raw = get_json(url, source="archidekt", key=str(deck_id), refresh=refresh)
     return parse_deck(raw)
 
 

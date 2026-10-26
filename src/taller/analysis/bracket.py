@@ -21,13 +21,24 @@ def is_tutor(entry: Entry) -> bool:
     """¿Busca cartas en la biblioteca? No cuenta buscar tierras (eso es ramp)."""
     deck_card, card = entry
     if deck_card.tags:
-        # Ojo: "tutored by name" (ej. Command Tower) no es un tutor.
-        return any(tag == "tutor" or tag.startswith("tutor-") for tag in deck_card.tags)
+        return any(is_tutor_tag(tag) for tag in deck_card.tags)
     # Sin etiquetas: cada frase "search your library for ..." que no hable de tierras.
     for sentence in SEARCH_LIBRARY.findall(card.oracle_text):
         if "land" not in sentence.lower():
             return True
     return False
+
+
+def is_tutor_tag(tag: str) -> bool:
+    """¿La etiqueta indica un tutor de verdad?
+
+    No cuentan: "tutored by name" (Command Tower), "tutor-land-..." (ramp y
+    fetchlands) ni "tutor-to-..." (solo dice adónde va la carta; Kodama's
+    Reach la trae y es ramp).
+    """
+    if tag == "tutor":
+        return True
+    return tag.startswith("tutor-") and not tag.startswith(("tutor-land", "tutor-to-"))
 
 
 def bracket_findings(entries: list[Entry]) -> dict[str, list[str]]:

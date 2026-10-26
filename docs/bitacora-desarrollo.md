@@ -56,6 +56,38 @@
 
 ### Qué sigue
 
-- Martín: revisar la lista de Tokens contra el mazo físico y, si coincide, poner `lista_sincronizada: true`.
-- Martín: subir la lista completa de Aang a Archidekt (hoy tiene 3 cartas). Con eso se crea su perfil y se cierra la Fase 1.
-- Opcional: comparar contra una lista de Isshin de bracket 3 (la usada de prueba tiene 16 Game Changers).
+- Ver la entrada siguiente: la Fase 1 se cerró el mismo día con Ureni en lugar de Aang.
+
+## 2026-10-25 — Fase 1 cerrada: Ureni y ajustes
+
+### Qué se hizo
+
+- **Tokens confirmada:** la lista de Archidekt coincide con el mazo físico (`lista_sincronizada: true`).
+- **`--refrescar`:** `taller analizar` y `taller comparar` pueden ignorar la copia de hoy de Archidekt, para analizar un mazo editado el mismo día.
+- **Ureni en lugar de Aang:** la lista de Aang sigue incompleta en Archidekt, así que Martín eligió DragonSSSS! (Ureni, bracket 4, ganar en turno 4-5, lista confirmada). El criterio de la Fase 1 en CLAUDE.md se actualizó.
+- **Clasificación más fina**, descubierta al analizar un mazo muy distinto a Isshin:
+  - `land ramp` cuenta como ramp; las etiquetas `tutor-land...` y `tutor-to-...` ya no cuentan como tutor (fetchlands, Cultivate, Kodama's Reach).
+  - Los counterspells (`counterspell-soft`, etc.) cuentan como interacción en removal.
+  - Los tutores ya no salen como "candidatas a salir".
+- **Campos nuevos del perfil:** `tipos_tema` (ej. `Dragon`, para que los dragones mismos sean piezas del tema) y `referencias` (rangos propios por rol; Ureni usa `ramp: [16, 20]`).
+- El resumen cuenta piezas del tema y menciona los combos presentes en bracket 4.
+
+54 pruebas pasando. Isshin no cambió con los ajustes (se comparó el reporte antes y después).
+
+### Qué dice el análisis de DragonSSSS! (Ureni)
+
+- Ramp 20 (dentro de su rango propio 16-20), robo 9 de 10-12, sin wipes ni protección.
+- 9 tutores y 2 Game Changers (Worldly Tutor, Gamble): sin problema en bracket 4.
+- 7 combos de dos cartas presentes (ej. Niv-Mizzet Parun + Visionary): ruta de victoria alterna.
+- 39 piezas del tema; solo 3 cartas sin rol (Reflections of Littjara, Nature's Will, Monstrous Vortex).
+
+### Qué aprendimos
+
+- Un segundo mazo muy distinto encuentra huecos que el primero no mostraba: probar con variedad.
+- Antes de cambiar reglas compartidas, comparar el resultado del mazo anterior para confirmar que no se rompió.
+- Las referencias generales sirven de punto de partida, pero el perfil de cada mazo puede justificar otras.
+
+### Qué sigue
+
+- **Fase 2: colección.** Importar un CSV de ManaBox por caja y que las sugerencias digan "ya la tienes, está en tal caja".
+- Pendiente cuando haya lista: perfil y reporte de Aang.

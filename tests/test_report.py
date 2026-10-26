@@ -2,7 +2,7 @@
 
 from taller.analysis import bracket, mana
 from taller.analysis.analyze import DeckAnalysis, target_turn
-from taller.analysis.report import nonland_without_role, render
+from taller.analysis.report import has_theme_type, nonland_without_role, render
 from taller.analysis.roles import group_by_role
 from taller.profiles import DeckProfile
 from taller.sources.archidekt import Deck
@@ -71,3 +71,14 @@ def test_maybeboard_fills_missing_role():
 def test_missing_spellbook_is_reported():
     report = render(build_analysis(ENTRIES, combos=None))
     assert "Spellbook no respondió" in report
+
+
+def test_theme_type_matches_creature_subtype():
+    assert has_theme_type("Creature — Dragon", ["Dragon"]) is True
+    assert has_theme_type("Legendary Creature — Elder Dragon", ["Dragon"]) is True
+    assert has_theme_type("Creature — Dragonfly", ["Dragon"]) is False  # palabra completa, no un pedazo
+
+
+def test_tutors_are_not_candidates_to_cut():
+    entries = ENTRIES + [make_entry("Worldly Tutor", type_line="Instant", tags=["tutor-creature"])]
+    assert "Worldly Tutor" not in nonland_without_role(build_analysis(entries))

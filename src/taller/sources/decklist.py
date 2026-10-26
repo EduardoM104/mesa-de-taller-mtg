@@ -24,14 +24,14 @@ CARD_LINE = re.compile(r"^(\d+)x?\s+(.+?)(\s+\([A-Za-z0-9]+\)\s+\S+)?(\s+\*\w+\*
 SKIPPED_SECTIONS = {"sideboard", "maybeboard", "considering", "tokens"}
 
 
-def load_other_deck(source: str) -> tuple[Deck, list[str]]:
+def load_other_deck(source: str, refresh: bool = False) -> tuple[Deck, list[str]]:
     """Carga un mazo ajeno desde una URL de Archidekt o un archivo de texto.
 
     Devuelve el mazo y los nombres que no se encontraron en Scryfall.
     """
     match = ARCHIDEKT_URL.search(source)
     if match:
-        return fetch_deck(int(match.group(1))), []
+        return fetch_deck(int(match.group(1)), refresh=refresh), []
     path = Path(source)
     return deck_from_text(path.read_text(encoding="utf-8"), name=path.stem)
 

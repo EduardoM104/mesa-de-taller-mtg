@@ -20,20 +20,23 @@ REPORTS_DIR = Path(__file__).resolve().parents[2] / "reports"
 
 app = typer.Typer(help="Mesa de taller para mazos de Commander.", no_args_is_help=True)
 
+# Opción compartida por los comandos: ignorar la copia de hoy de Archidekt.
+REFRESH_OPTION = typer.Option(False, "--refrescar", help="Vuelve a descargar de Archidekt aunque haya copia de hoy.")
+
 
 @app.callback()
 def main() -> None:
     """Mesa de taller para mazos de Commander."""
     # Con un callback, typer siempre pide el nombre del subcomando
-    # (taller analizar ...), aunque por ahora solo haya uno.
+    # (taller analizar ..., taller comparar ...).
 
 
 @app.command()
-def analizar(slug: str) -> None:
+def analizar(slug: str, refrescar: bool = REFRESH_OPTION) -> None:
     """Analiza el mazo del perfil <slug> y escribe el reporte en reports/."""
     profile = load_profile(slug)
     typer.echo(f"Analizando {profile.nombre}...")
-    report = render(analyze(profile))
+    report = render(analyze(profile, refresh=refrescar))
 
     REPORTS_DIR.mkdir(exist_ok=True)
     path = REPORTS_DIR / f"{slug}-{date.today().isoformat()}.md"
@@ -42,12 +45,12 @@ def analizar(slug: str) -> None:
 
 
 @app.command()
-def comparar(slug: str, fuente: str) -> None:
+def comparar(slug: str, fuente: str, refrescar: bool = REFRESH_OPTION) -> None:
     """Compara tu mazo <slug> contra otro: una URL de Archidekt o un archivo .txt."""
     profile = load_profile(slug)
     typer.echo(f"Analizando {profile.nombre}...")
-    own = analyze(profile)
-    other, unresolved = load_other_deck(fuente)
+    own = analyze(profile, refresh=refrescar)
+    other, unresolved = load_other_deck(fuente, refresh=refrescar)
     typer.echo(f"Comparando contra {other.name}...")
     report = render_comparison(compare(own, other, unresolved))
 

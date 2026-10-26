@@ -6,13 +6,13 @@ si una fuente falla, el resto debe seguir funcionando).
 """
 
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import httpx
 
 from taller.analysis import bracket, mana
 from taller.analysis.pairing import Entry, pair_cards
-from taller.analysis.roles import group_by_role
+from taller.analysis.roles import REFERENCES, group_by_role, references_for
 from taller.profiles import DeckProfile
 from taller.sources.archidekt import Deck, fetch_deck
 from taller.sources.scryfall import get_cards, update_cards
@@ -39,15 +39,20 @@ class DeckAnalysis:
     findings: dict[str, list[str]]
     warnings: list[str]
     combos: dict[str, list[Combo]] | None  # None si Spellbook no respondió
+    # Rangos por rol: los generales, o los del perfil si los define.
+    references: dict[str, tuple[int, int]] = field(default_factory=lambda: dict(REFERENCES))
 
 
-def analyze(profile: DeckProfile) -> DeckAnalysis:
-    """Analiza el mazo del perfil y devuelve un DeckAnalysis."""
+def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
+    """Analiza el mazo del perfil y devuelve un DeckAnalysis.
+
+    Con refresh=True se vuelve a descargar el mazo de Archidekt.
+    """
     if profile.archidekt_id is None:
         raise ValueError(f"El perfil '{profile.slug}' no tiene archidekt_id")
 
     update_cards()
-    deck = fetch_deck(profile.archidekt_id)
+    deck = fetch_deck(profile.archidekt_id, refresh=refresh)
     all_ids = [card.oracle_id for card in deck.mainboard + deck.maybeboard]
     cards = get_cards(all_ids)
     entries, missing = pair_cards(deck.mainboard, cards)
@@ -78,6 +83,7 @@ def analyze(profile: DeckProfile) -> DeckAnalysis:
         findings=findings,
         warnings=warnings,
         combos=combos,
+        references=references_for(profile.referencias),
     )
 
 

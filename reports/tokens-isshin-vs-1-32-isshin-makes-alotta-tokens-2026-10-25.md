@@ -13,7 +13,7 @@
 | --- | --- | --- | --- |
 | Tierras | 34 | 33 | — |
 | Costo promedio | 3.0 | 2.8 | — |
-| Ramp | 11 | 12 | 10–12 |
+| Ramp | 11 | 14 | 10–12 |
 | Robo | 7 | 11 | 10–12 |
 | Removal | 11 | 8 | 8–10 |
 | Wipes | 1 | 2 | 2–4 |
@@ -28,7 +28,7 @@
 
 ## 3. Solo en su lista (73)
 
-- **Ramp:** Smothering Tithe · Jeska's Will · Mox Amber · Mana Vault · Chrome Mox · Lotus Petal · Gleaming Splendor · Dark Ritual · Mox Opal · Neheb, the Eternal
+- **Ramp:** Smothering Tithe · Jeska's Will · Mox Amber · Mana Vault · Chrome Mox · Lotus Petal · Ojer Taq, Deepest Foundation // Temple of Civilization · Gleaming Splendor · Battle Angels of Tyr · Dark Ritual · Mox Opal · Neheb, the Eternal
 - **Robo:** Jeska's Will · Tymna the Weaver · The One Ring · Sephiroth, Fabled SOLDIER // Sephiroth, One-Winged Angel · Esper Sentinel · Wheel of Fortune · Ad Nauseam · Gleaming Splendor · Battle Angels of Tyr
 - **Removal:** Chaos Warp · Tibalt's Trickery · Deadly Rollick · Elspeth, Storm Slayer · Final Showdown · Farewell
 - **Wipes:** Final Showdown · Farewell

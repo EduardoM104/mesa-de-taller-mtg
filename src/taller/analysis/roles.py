@@ -16,7 +16,10 @@ from taller.analysis.pairing import Entry, is_land
 #   text: expresión regular para el respaldo sobre el texto de la carta
 ROLES = {
     "ramp": {
-        "tags": {"ramp", "mana dork", "adds multiple mana", "ritual", "cost reducer", "extra land"},
+        "tags": {
+            "ramp", "land ramp", "mana dork", "adds multiple mana", "ritual", "cost reducer", "extra land",
+            "utility mana rock", "repeatable treasures",
+        },
         "prefixes": ("mana rock",),
         "text": r"\badd \{|search your library for .*land",
     },
@@ -29,8 +32,9 @@ ROLES = {
         "text": r"\bdraws? (a|two|three|x|\d+) cards?",
     },
     "removal": {
-        "tags": {"spot removal", "repeatable removal", "multi removal", "counterspell"},
-        "prefixes": ("removal-",),
+        # Incluye counterspells: también son interacción.
+        "tags": {"spot removal", "repeatable removal", "multi removal"},
+        "prefixes": ("removal-", "counterspell"),
         "text": r"(destroy|exile) target|counter target|damage to (any target|target creature)",
     },
     "wipes": {
@@ -64,6 +68,14 @@ REFERENCES = {
     "wipes": (2, 4),
     "protección": (3, 6),
 }
+
+
+def references_for(overrides: dict[str, tuple[int, int]]) -> dict[str, tuple[int, int]]:
+    """Rangos de referencia del mazo: los generales, cambiados por los del perfil."""
+    unknown = set(overrides) - set(REFERENCES)
+    if unknown:
+        raise ValueError(f"Roles desconocidos en referencias: {', '.join(sorted(unknown))}")
+    return {**REFERENCES, **overrides}
 
 
 def matches_tags(tags: list[str], rule: dict) -> bool:

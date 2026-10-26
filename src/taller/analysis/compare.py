@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from taller.analysis import mana
 from taller.analysis.analyze import DeckAnalysis
 from taller.analysis.pairing import Entry, pair_cards
-from taller.analysis.roles import REFERENCES, group_by_role
+from taller.analysis.roles import group_by_role
 from taller.sources.archidekt import Deck, DeckCard
 from taller.sources.scryfall import get_cards
 
@@ -77,7 +77,7 @@ def is_basic(card) -> bool:
 def gaps_they_fill(own: DeckAnalysis, other_roles: dict[str, list[str]], only_theirs: set[str]) -> dict[str, list[str]]:
     """Para cada rol en el que tu mazo está abajo, sus cartas (que tú no tienes) que lo cubren."""
     gaps = {}
-    for role, (low, _) in REFERENCES.items():
+    for role, (low, _) in own.references.items():
         if len(own.roles[role]) < low:
             gaps[role] = [name for name in other_roles[role] if name in only_theirs]
     return gaps
