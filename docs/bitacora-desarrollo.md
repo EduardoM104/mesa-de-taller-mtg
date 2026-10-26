@@ -113,6 +113,13 @@
 
 ### Qué sigue
 
-- Pieza para Martín: la prueba de que `latest_csv` ignora archivos que no son `.csv`.
 - Escanear más cajas en ManaBox y reimportar; con más colores habrá sugerencias para Ureni (hoy no hay cartas Temur en la colección).
 - **Fase 3: precios.**
+
+### Más tarde el mismo día
+
+- Martín actualizó el CSV con el binder **Dimir** (23 cartas). Colección: 45 cartas en 39 filas, todas encontradas en Scryfall. Ningún mazo con perfil es azul-negro, así que los reportes de Isshin y Ureni no cambian.
+- Prueba nueva: `latest_csv` ignora archivos que no son `.csv`. Se comprobó que falla si se quita el filtro: una prueba que no falla al romper lo que vigila no vigila nada.
+- Al leer el CSV, macOS puede descargarlo de iCloud y marcar su "último uso"; el contenido, el nombre y la fecha de modificación no cambian.
+
+70 pruebas pasando.
