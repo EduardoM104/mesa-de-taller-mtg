@@ -6,7 +6,7 @@
 - **Ventana de victoria objetivo:** turno 5
 - **Tema:** Mardu de ataques y tokens; Isshin duplica los disparos de ataque
 - **Archidekt:** https://archidekt.com/decks/26390360 (editado 2026-10-24)
-- **Colección:** 22 cartas (ManaBox_Collection.csv, importada 2026-10-26)
+- **Colección:** 45 cartas (ManaBox_Collection.csv, importada 2026-10-26)
 
 ## 1. Resumen
 
@@ -104,7 +104,18 @@ Fuente: Commander Spellbook.
 - **Te quedan 3 espacio(s) de Game Changer** en bracket 3; úsalos en consistencia (robo, protección, ramp). En tu Maybeboard: Teferi's Protection.
 - **Revisa si empujan el plan** (sin rol detectado; candidatas a salir): Smile at Death · Corrupted Conviction · Ogre Battledriver · Faithless Looting
 - **Evita agregar** si quieres quedarte en bracket 3 (completarían un combo de dos cartas): Appa, Loyal Sky Bison · Boros Reckoner · Breath of Fury · Felidar Guardian · Gilraen, Dúnedain Protector · Helm of the Host · Plague of Vermin · Port Razer · Raptor Hatchling · Reiterate · Restoration Angel · Rionya, Fire Dancer · Sandstorm Crasher · Spawnsire of Ulamog · Storm Herd · Sword of Hearth and Home · The Neutrinos · Tooth and Claw · Wispweaver Angel · Éomer, Marshal of Rohan
-- *Prioridad por precio: llega en la fase 3.*
+
+### Lista de compra
+
+Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall (TCGplayer, 2026-10-26), tipo de cambio 18. Los precios de tiendas mexicanas llegan en el siguiente paso.
+
+| Carta | Para | USD | MXN aprox. |
+| --- | --- | --- | --- |
+| Welcoming Vampire | robo | 2.63 | $47 |
+| Mentor of the Meek | robo | 4.72 | $85 |
+| Teferi's Protection | Game Changer | 46.87 | $844 |
+| Caesar, Legion's Emperor | robo | sin precio | — |
+| **Total** | | **54.22** | **$976** |
 
 ## 8. Ventana de victoria
 

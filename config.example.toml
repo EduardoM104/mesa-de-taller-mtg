@@ -5,3 +5,7 @@
 # Carpeta donde ManaBox deja sus exportaciones CSV. El taller solo la lee:
 # nunca escribe, mueve ni borra nada ahí.
 carpeta_manabox = "~/Documents/MTG Archive"
+
+[precios]
+# Pesos por dólar para convertir los precios de referencia (USD) a MXN.
+tipo_de_cambio = 18

@@ -11,6 +11,7 @@ from taller.analysis.bracket import MAX_GAME_CHANGERS
 from taller.analysis.collection import with_location
 from taller.analysis.pairing import is_land
 from taller.analysis.roles import group_by_role
+from taller.prices.shopping import shopping_list, total_usd, usd_to_mxn
 
 ROLE_TITLES = {
     "ramp": "Ramp",
@@ -312,7 +313,40 @@ def suggestions_section(analysis: DeckAnalysis) -> list[str]:
             lines.append(f"- **Evita agregar** si quieres quedarte en bracket {analysis.profile.bracket} "
                          f"(completarían un combo de dos cartas): {names(risky)}")
 
-    lines.append("- *Prioridad por precio: llega en la fase 3.*")
+    return lines + [""] + shopping_section(analysis)
+
+
+def shopping_candidates(analysis: DeckAnalysis) -> dict[str, list[str]]:
+    """Lo que el reporte sugiere agregar desde el Maybeboard: {motivo: [nombres]}."""
+    candidates = {ROLE_TITLES[role].lower(): analysis.maybe_roles[role] for role in roles_below(analysis)}
+    if game_changer_suggestion(analysis):
+        candidates["Game Changer"] = maybe_game_changers(analysis)
+    return candidates
+
+
+def shopping_section(analysis: DeckAnalysis) -> list[str]:
+    """Tabla con las sugerencias que no tienes, de la más barata a la más cara."""
+    rate = analysis.exchange_rate
+    items = shopping_list(shopping_candidates(analysis), analysis.maybe_entries, analysis.owned)
+    lines = [
+        "### Lista de compra",
+        "",
+        f"Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall "
+        f"(TCGplayer, {analysis.prices_date}), tipo de cambio {rate:g}. Los precios de tiendas mexicanas "
+        "llegan en el siguiente paso.",
+        "",
+    ]
+    if not items:
+        return lines + ["Nada que comprar: no hay sugerencias del Maybeboard o ya las tienes todas."]
+
+    lines += ["| Carta | Para | USD | MXN aprox. |", "| --- | --- | --- | --- |"]
+    for item in items:
+        if item.price_usd is None:
+            lines.append(f"| {item.name} | {item.reason} | sin precio | — |")
+        else:
+            lines.append(f"| {item.name} | {item.reason} | {item.price_usd:.2f} | ${usd_to_mxn(item.price_usd, rate):,} |")
+    total = total_usd(items)
+    lines.append(f"| **Total** | | **{total:.2f}** | **${usd_to_mxn(total, rate):,}** |")
     return lines
 
 
@@ -322,10 +356,15 @@ def game_changer_suggestion(analysis: DeckAnalysis) -> list[str]:
     used = len(analysis.findings["game_changers"])
     if not limit or used >= limit:
         return []
-    in_maybe = [deck_card.name for deck_card, card in analysis.maybe_entries if card.game_changer]
-    extra = f" En tu Maybeboard: {names(in_maybe)}." if in_maybe else ""
+    in_maybe = maybe_game_changers(analysis)
+    extra = f" En tu Maybeboard: {names(maybe_with_location(analysis, in_maybe))}." if in_maybe else ""
     return [f"- **Te quedan {limit - used} espacio(s) de Game Changer** en bracket {analysis.profile.bracket}; "
             f"úsalos en consistencia (robo, protección, ramp).{extra}"]
+
+
+def maybe_game_changers(analysis: DeckAnalysis) -> list[str]:
+    """Game Changers que tienes en el Maybeboard."""
+    return [deck_card.name for deck_card, card in analysis.maybe_entries if card.game_changer]
 
 
 def window_section(analysis: DeckAnalysis) -> list[str]:

@@ -15,9 +15,10 @@ from taller.analysis.collection import Owned, fitting_entries
 from taller.analysis.pairing import Entry, pair_cards
 from taller.analysis.roles import REFERENCES, group_by_role, references_for
 from taller.collection.store import collection_info, owned_by_oracle
+from taller.config import DEFAULT_EXCHANGE_RATE, exchange_rate
 from taller.profiles import DeckProfile
 from taller.sources.archidekt import Deck, fetch_deck
-from taller.sources.scryfall import get_cards, update_cards
+from taller.sources.scryfall import cards_date, get_cards, update_cards
 from taller.sources.spellbook import Combo, fetch_combos
 
 
@@ -47,6 +48,9 @@ class DeckAnalysis:
     owned: Owned = field(default_factory=dict)
     collection_entries: list[Entry] = field(default_factory=list)
     collection: dict | None = None  # total, archivo y fecha; None si no hay colección
+    # Precios: tipo de cambio de config.toml y fecha de los precios de Scryfall.
+    exchange_rate: float = DEFAULT_EXCHANGE_RATE
+    prices_date: str | None = None
 
 
 def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
@@ -96,6 +100,8 @@ def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
         owned=owned,
         collection_entries=collection_entries,
         collection=collection_info(),
+        exchange_rate=exchange_rate(),
+        prices_date=cards_date(),
     )
 
 

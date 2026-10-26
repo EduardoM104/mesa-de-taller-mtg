@@ -6,7 +6,7 @@
 - **Ventana de victoria objetivo:** turno 4-5
 - **Tema:** Dragones Temur; rampear y poner dragones grandes sin pagar su costo
 - **Archidekt:** https://archidekt.com/decks/21296260 (editado 2026-09-27)
-- **Colección:** 22 cartas (ManaBox_Collection.csv, importada 2026-10-26)
+- **Colección:** 45 cartas (ManaBox_Collection.csv, importada 2026-10-26)
 
 ## 1. Resumen
 
@@ -108,7 +108,12 @@ Fuente: Commander Spellbook.
 - **Sube wipes** (0, referencia 2–4). Nada en tu Maybeboard cubre este rol.
 - **Sube protección** (0, referencia 3–6). Nada en tu Maybeboard cubre este rol.
 - **Revisa si empujan el plan** (sin rol detectado; candidatas a salir): Reflections of Littjara · Nature's Will · Monstrous Vortex
-- *Prioridad por precio: llega en la fase 3.*
+
+### Lista de compra
+
+Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall (TCGplayer, 2026-10-26), tipo de cambio 18. Los precios de tiendas mexicanas llegan en el siguiente paso.
+
+Nada que comprar: no hay sugerencias del Maybeboard o ya las tienes todas.
 
 ## 8. Ventana de victoria
 

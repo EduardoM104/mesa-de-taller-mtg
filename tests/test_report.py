@@ -103,3 +103,11 @@ def test_collection_cards_fill_low_roles():
 
 def test_header_says_when_collection_is_missing():
     assert "sin importar" in render(build_analysis(ENTRIES))
+
+
+def test_shopping_list_in_report():
+    # Robo está abajo y Mentor (4.72 USD) está en el Maybeboard y no lo tienes.
+    deck_card, card = make_entry("Mentor of the Meek", type_line="Creature", tags=["repeatable pure draw"])
+    card.price_usd = 4.72
+    report = render(build_analysis(ENTRIES, maybe_entries=[(deck_card, card)]))
+    assert "| Mentor of the Meek | robo | 4.72 | $85 |" in report
