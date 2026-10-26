@@ -1,0 +1,7 @@
+# Plantilla de configuración. Cópiala como config.toml (que no se versiona)
+# y ajusta las rutas a tu Mac.
+
+[coleccion]
+# Carpeta donde ManaBox deja sus exportaciones CSV. El taller solo la lee:
+# nunca escribe, mueve ni borra nada ahí.
+carpeta_manabox = "~/Documents/MTG Archive"

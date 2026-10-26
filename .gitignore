@@ -12,3 +12,6 @@ __pycache__/
 
 # Basura de macOS
 .DS_Store
+
+# Configuración local con rutas de esta Mac (plantilla: config.example.toml)
+config.toml
