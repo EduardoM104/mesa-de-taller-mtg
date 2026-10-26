@@ -107,15 +107,15 @@ Fuente: Commander Spellbook.
 
 ### Lista de compra
 
-Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall (TCGplayer, 2026-10-26), tipo de cambio 18. Los precios de tiendas mexicanas llegan en el siguiente paso.
+Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall (TCGplayer, 2026-10-26), tipo de cambio 18. Las ligas buscan la carta en cada tienda para ver su precio en pesos.
 
-| Carta | Para | USD | MXN aprox. |
-| --- | --- | --- | --- |
-| Welcoming Vampire | robo | 2.63 | $47 |
-| Mentor of the Meek | robo | 4.72 | $85 |
-| Teferi's Protection | Game Changer | 46.87 | $844 |
-| Caesar, Legion's Emperor | robo | sin precio | — |
-| **Total** | | **54.22** | **$976** |
+| Carta | Para | USD | MXN aprox. | Tiendas |
+| --- | --- | --- | --- | --- |
+| Welcoming Vampire | robo | 2.63 | $47 | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Welcoming+Vampire) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Welcoming+Vampire) |
+| Mentor of the Meek | robo | 4.72 | $85 | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Mentor+of+the+Meek) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Mentor+of+the+Meek) |
+| Teferi's Protection | Game Changer | 46.87 | $844 | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Teferi%27s+Protection) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Teferi%27s+Protection) |
+| Caesar, Legion's Emperor | robo | sin precio | — | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Caesar%2C+Legion%27s+Emperor) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Caesar%2C+Legion%27s+Emperor) |
+| **Total** | | **54.22** | **$976** | |
 
 ## 8. Ventana de victoria
 

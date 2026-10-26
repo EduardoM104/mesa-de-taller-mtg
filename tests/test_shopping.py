@@ -2,6 +2,7 @@
 
 from taller.config import exchange_rate
 from taller.prices.shopping import shopping_list, total_usd, usd_to_mxn
+from taller.prices.stores import search_links
 
 from helpers import make_entry
 
@@ -47,3 +48,9 @@ def test_card_with_two_reasons_appears_once():
 def test_total_ignores_cards_without_price():
     items = shopping_list({"robo": ["Mentor of the Meek", "Caesar"]}, MAYBE, {})
     assert total_usd(items) == 4.72
+
+
+def test_search_links_encode_card_name():
+    links = search_links("Teferi's Protection")
+    assert links["Yellow Rabbit"] == "https://yellowrabbit.mx/search?q=Teferi%27s+Protection"
+    assert links["TCG Wolf"] == "https://www.tcgwolf.com/buscar?q=Teferi%27s+Protection"

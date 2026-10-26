@@ -12,6 +12,7 @@ from taller.analysis.collection import with_location
 from taller.analysis.pairing import is_land
 from taller.analysis.roles import group_by_role
 from taller.prices.shopping import shopping_list, total_usd, usd_to_mxn
+from taller.prices.stores import search_links
 
 ROLE_TITLES = {
     "ramp": "Ramp",
@@ -332,21 +333,22 @@ def shopping_section(analysis: DeckAnalysis) -> list[str]:
         "### Lista de compra",
         "",
         f"Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall "
-        f"(TCGplayer, {analysis.prices_date}), tipo de cambio {rate:g}. Los precios de tiendas mexicanas "
-        "llegan en el siguiente paso.",
+        f"(TCGplayer, {analysis.prices_date}), tipo de cambio {rate:g}. Las ligas buscan la carta en "
+        "cada tienda para ver su precio en pesos.",
         "",
     ]
     if not items:
         return lines + ["Nada que comprar: no hay sugerencias del Maybeboard o ya las tienes todas."]
 
-    lines += ["| Carta | Para | USD | MXN aprox. |", "| --- | --- | --- | --- |"]
+    lines += ["| Carta | Para | USD | MXN aprox. | Tiendas |", "| --- | --- | --- | --- | --- |"]
     for item in items:
         if item.price_usd is None:
-            lines.append(f"| {item.name} | {item.reason} | sin precio | — |")
+            prices = "sin precio | —"
         else:
-            lines.append(f"| {item.name} | {item.reason} | {item.price_usd:.2f} | ${usd_to_mxn(item.price_usd, rate):,} |")
+            prices = f"{item.price_usd:.2f} | ${usd_to_mxn(item.price_usd, rate):,}"
+        lines.append(f"| {item.name} | {item.reason} | {prices} | {store_links(item.name)} |")
     total = total_usd(items)
-    lines.append(f"| **Total** | | **{total:.2f}** | **${usd_to_mxn(total, rate):,}** |")
+    lines.append(f"| **Total** | | **{total:.2f}** | **${usd_to_mxn(total, rate):,}** | |")
     return lines
 
 
@@ -360,6 +362,11 @@ def game_changer_suggestion(analysis: DeckAnalysis) -> list[str]:
     extra = f" En tu Maybeboard: {names(maybe_with_location(analysis, in_maybe))}." if in_maybe else ""
     return [f"- **Te quedan {limit - used} espacio(s) de Game Changer** en bracket {analysis.profile.bracket}; "
             f"úsalos en consistencia (robo, protección, ramp).{extra}"]
+
+
+def store_links(card_name: str) -> str:
+    """Ligas Markdown a la búsqueda de la carta en cada tienda."""
+    return " · ".join(f"[{store}]({url})" for store, url in search_links(card_name).items())
 
 
 def maybe_game_changers(analysis: DeckAnalysis) -> list[str]:

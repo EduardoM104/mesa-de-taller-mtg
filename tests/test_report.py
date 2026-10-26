@@ -111,3 +111,4 @@ def test_shopping_list_in_report():
     card.price_usd = 4.72
     report = render(build_analysis(ENTRIES, maybe_entries=[(deck_card, card)]))
     assert "| Mentor of the Meek | robo | 4.72 | $85 |" in report
+    assert "[TCG Wolf](https://www.tcgwolf.com/buscar?q=Mentor+of+the+Meek)" in report
