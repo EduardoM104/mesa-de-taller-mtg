@@ -121,3 +121,12 @@ def test_fitting_entries_respects_identity_and_deck():
     cards = {card.oracle_id: card for card in (in_colors, off_colors, in_deck)}
     entries = fitting_entries(cards, identity=["W", "B", "R"], exclude={"Sol Ring"})
     assert [deck_card.name for deck_card, _ in entries] == ["Corpse Knight"]
+
+
+def test_latest_csv_ignores_other_files(tmp_path):
+    # Un CSV y, después, un .txt más reciente: debe ganar el CSV.
+    csv_file = write_csv(tmp_path / "coleccion.csv")
+    notes = tmp_path / "notas.txt"
+    notes.write_text("no soy un CSV", encoding="utf-8")
+    os.utime(csv_file, (1_000_000, 1_000_000))  # hacemos al CSV el más viejo
+    assert latest_csv(tmp_path) == csv_file
