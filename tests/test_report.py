@@ -4,6 +4,7 @@ from taller.analysis import bracket, mana
 from taller.analysis.analyze import DeckAnalysis, target_turn
 from taller.analysis.report import has_theme_type, nonland_without_role, render
 from taller.analysis.roles import group_by_role
+from taller.prices.shipping import ShippingRule
 from taller.prices.yellow_rabbit import Offer
 from taller.profiles import DeckProfile
 from taller.sources.archidekt import Deck
@@ -123,3 +124,16 @@ def test_shopping_list_shows_store_offer():
         url="https://yellowrabbit.mx/products/mentor")}
     report = render(analysis)
     assert "[$15](https://yellowrabbit.mx/products/mentor) NM · Innistrad Remastered" in report
+
+
+def test_total_cost_includes_shipping():
+    deck_card, card = make_entry("Mentor of the Meek", type_line="Creature", tags=["repeatable pure draw"])
+    card.price_usd = 4.72
+    analysis = build_analysis(ENTRIES, maybe_entries=[(deck_card, card)])
+    analysis.store_offers = {"Mentor of the Meek": Offer(
+        title="Mentor of the Meek [Innistrad Remastered]", condition="Near Mint", price_mxn=15, url="u")}
+    analysis.shipping = {"Yellow Rabbit": ShippingRule(cost=0, free_from=0, note="recoger en sucursal"),
+                         "TCG Wolf": ShippingRule(cost=150, free_from=2200)}
+    report = render(analysis)
+    assert "- **Yellow Rabbit:** $15 + envío $0 (recoger en sucursal) = **$15**" in report
+    assert "$85 + envío $150 = **$235**. Te faltarían $2,115 para el envío gratis" in report

@@ -119,6 +119,11 @@ Sugerencias del Maybeboard que no están en tu colección. Referencia: Scryfall 
 
 El total de Yellow Rabbit no incluye 2 carta(s) sin stock.
 
+**Costo total con envío:**
+
+- **Yellow Rabbit:** $830 + envío $0 (recoger en sucursal) = **$830**
+- **TCG Wolf** (sin precios automáticos; estimado con la referencia): $976 + envío $150 (costo promedio) = **$1,126**. Te faltarían $1,224 para el envío gratis (desde $2,200).
+
 ## 8. Ventana de victoria
 
 - **Objetivo del perfil:** turno 5

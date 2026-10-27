@@ -42,3 +42,8 @@ def ucp_profile(path: Path = CONFIG_PATH) -> str | None:
     if not path.exists():
         return None
     return load_config(path).get("tiendas", {}).get("perfil_ucp")
+
+
+def optional_config(path: Path = CONFIG_PATH) -> dict:
+    """config.toml si existe; si no, un diccionario vacío (para lo que es opcional)."""
+    return load_config(path) if path.exists() else {}

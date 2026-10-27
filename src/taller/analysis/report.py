@@ -11,6 +11,7 @@ from taller.analysis.bracket import MAX_GAME_CHANGERS
 from taller.analysis.collection import with_location
 from taller.analysis.pairing import is_land
 from taller.analysis.roles import group_by_role
+from taller.prices.shipping import missing_for_free, shipping_cost
 from taller.prices.shopping import ShoppingItem, shopping_list, total_usd, usd_to_mxn
 from taller.prices.stores import search_links
 
@@ -359,7 +360,35 @@ def shopping_section(analysis: DeckAnalysis) -> list[str]:
     lines.append(f"| **Total** | | **{reference_total}** | **{store_total}** | |")
     if analysis.store_offers is not None and len(found) < len(items):
         lines += ["", f"El total de Yellow Rabbit no incluye {len(items) - len(found)} carta(s) sin stock."]
+    return lines + total_cost_lines(analysis, sum(offer.price_mxn for offer in found) if found else None,
+                                    usd_to_mxn(total_usd(items), rate))
+
+
+def total_cost_lines(analysis: DeckAnalysis, yellow_rabbit_total: float | None, reference_total: int) -> list[str]:
+    """Costo total con envío por tienda, según las reglas de [envios] en config.toml."""
+    if not analysis.shipping:
+        return []
+    lines = ["", "**Costo total con envío:**", ""]
+    rule = analysis.shipping.get("Yellow Rabbit")
+    if rule and yellow_rabbit_total is not None:
+        shipping = shipping_cost(yellow_rabbit_total, rule)
+        lines.append(f"- **Yellow Rabbit:** ${yellow_rabbit_total:,.0f} + envío ${shipping:,.0f}"
+                     f"{note_text(rule.note)} = **${yellow_rabbit_total + shipping:,.0f}**")
+    rule = analysis.shipping.get("TCG Wolf")
+    if rule:
+        shipping = shipping_cost(reference_total, rule)
+        line = (f"- **TCG Wolf** (sin precios automáticos; estimado con la referencia): ${reference_total:,} + "
+                f"envío ${shipping:,.0f}{note_text(rule.note)} = **${reference_total + shipping:,.0f}**")
+        missing = missing_for_free(reference_total, rule)
+        if missing:
+            line += f". Te faltarían ${missing:,.0f} para el envío gratis (desde ${rule.free_from:,.0f})"
+        lines.append(line + ".")
     return lines
+
+
+def note_text(note: str) -> str:
+    """" (recoger en sucursal)" o nada."""
+    return f" ({note})" if note else ""
 
 
 def reference_text(price_usd: float | None, rate: float) -> str:

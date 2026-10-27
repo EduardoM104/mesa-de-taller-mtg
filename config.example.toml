@@ -14,3 +14,8 @@ tipo_de_cambio = 18
 # Perfil público (UCP) con el que nos identificamos ante Yellow Rabbit: un JSON
 # servido como application/json. Sin esto, la lista de compra solo trae ligas.
 # perfil_ucp = "https://gist.githack.com/<usuario>/<gist>/raw/<versión>/mesa-de-taller-ucp.json"
+
+[envios]
+# Costo de envío por tienda (MXN) y monto a partir del cual es gratis (0 = nunca gratis).
+yellow_rabbit = { costo = 0, gratis_desde = 0, nota = "recoger en sucursal" }
+tcg_wolf = { costo = 150, gratis_desde = 2200, nota = "costo promedio" }

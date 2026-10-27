@@ -2,6 +2,7 @@
 
 from taller.config import exchange_rate
 from taller.prices.shopping import shopping_list, total_usd, usd_to_mxn
+from taller.prices.shipping import ShippingRule, missing_for_free, shipping_cost, shipping_rules
 from taller.prices.stores import search_links
 
 from helpers import make_entry
@@ -54,3 +55,21 @@ def test_search_links_encode_card_name():
     links = search_links("Teferi's Protection")
     assert links["Yellow Rabbit"] == "https://yellowrabbit.mx/search?q=Teferi%27s+Protection"
     assert links["TCG Wolf"] == "https://www.tcgwolf.com/buscar?q=Teferi%27s+Protection"
+
+
+def test_shipping_is_free_from_threshold():
+    rule = ShippingRule(cost=150, free_from=2200)
+    assert shipping_cost(1000, rule) == 150
+    assert shipping_cost(2200, rule) == 0
+    assert missing_for_free(1000, rule) == 1200
+
+
+def test_pickup_store_has_no_shipping():
+    rule = ShippingRule(cost=0, free_from=0, note="recoger en sucursal")
+    assert shipping_cost(500, rule) == 0
+    assert missing_for_free(500, rule) == 0
+
+
+def test_shipping_rules_read_from_config():
+    config = {"envios": {"tcg_wolf": {"costo": 150, "gratis_desde": 2200}}}
+    assert shipping_rules(config) == {"TCG Wolf": ShippingRule(cost=150, free_from=2200)}

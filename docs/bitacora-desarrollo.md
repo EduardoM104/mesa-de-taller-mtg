@@ -123,3 +123,31 @@
 - Al leer el CSV, macOS puede descargarlo de iCloud y marcar su "último uso"; el contenido, el nombre y la fecha de modificación no cambian.
 
 70 pruebas pasando.
+
+## 2026-10-26 — Fase 3: precios
+
+### Qué se hizo
+
+- **Lista de compra** en la sección 7 del reporte: las sugerencias del Maybeboard que no están en la colección, de la más barata a la más cara.
+  - **Referencia:** precio de Scryfall (TCGplayer, USD) convertido con el tipo de cambio de `config.toml` (18 por defecto).
+  - **Yellow Rabbit:** la copia más barata en stock (NM o LP) de esa carta exacta, por su canal oficial para agentes (UCP). Caché diaria y una pausa entre consultas.
+  - **Ligas de búsqueda** a Yellow Rabbit y TCG Wolf por carta.
+  - **Costo total con envío** por tienda, con las reglas de `[envios]` en `config.toml`: Yellow Rabbit sin envío (recoger en sucursal); TCG Wolf $150, gratis desde $2,200 (estimado con la referencia, porque no tiene precios automáticos).
+- **Perfil público UCP:** Martín publicó el gist `mesa-de-taller-ucp.json`. La dirección normal del gist entrega texto plano y la tienda lo rechazó; servido por githack (como JSON) sí lo aceptó. Después hubo que declarar los permisos de búsqueda de catálogo para que la tienda ofreciera la herramienta.
+- **TCG Wolf** no se automatiza: reto de Cloudflare en sus páginas y `/api/` prohibido en `robots.txt` (misma regla que Moxfield).
+- Resultado en Isshin: referencia $976; Yellow Rabbit $830 (Mentor of the Meek $15, Teferi's Protection $815; 2 sin stock); TCG Wolf estimado $1,126 con envío.
+
+89 pruebas pasando.
+
+### Qué aprendimos
+
+- Antes de automatizar una tienda, leer su `robots.txt` y su guía para agentes: dicen qué se permite y por qué canal.
+- Los precios de referencia y los de tienda pueden ser muy distintos (Mentor of the Meek: $85 de referencia, $15 en tienda), porque la referencia es de una impresión específica.
+- Revisar los resultados reales encontró dos errores que las pruebas no veían: nombres alternos ("T'Challa's Protection - Teferi's Protection") y búsquedas que traían cartas parecidas (se arregló buscando entre comillas).
+- Una caché debe guardar solo respuestas buenas; un error guardado duraría todo el día.
+
+### Qué sigue
+
+- Si se edita el gist, actualizar la versión en `perfil_ucp` de `config.toml` (githack guarda copia de la versión anterior).
+- Candidata: CardTrader (API oficial con token de la cuenta de Martín).
+- **Fase 4: web.** Antes de arrancar hay que decidir entre Streamlit y Next.js, y el hosting.

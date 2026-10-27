@@ -15,7 +15,8 @@ from taller.analysis.collection import Owned, fitting_entries
 from taller.analysis.pairing import Entry, pair_cards
 from taller.analysis.roles import REFERENCES, group_by_role, references_for
 from taller.collection.store import collection_info, owned_by_oracle
-from taller.config import DEFAULT_EXCHANGE_RATE, exchange_rate
+from taller.config import DEFAULT_EXCHANGE_RATE, exchange_rate, optional_config
+from taller.prices.shipping import ShippingRule, shipping_rules
 from taller.profiles import DeckProfile
 from taller.sources.archidekt import Deck, fetch_deck
 from taller.sources.scryfall import cards_date, get_cards, update_cards
@@ -54,6 +55,7 @@ class DeckAnalysis:
     # Ofertas de Yellow Rabbit para la lista de compra; None si no se consultó.
     store_offers: dict | None = None
     store_note: str = ""  # por qué no hay precios de tienda, si no los hay
+    shipping: dict[str, ShippingRule] = field(default_factory=dict)  # reglas de envío por tienda
 
 
 def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
@@ -105,6 +107,7 @@ def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:
         collection=collection_info(),
         exchange_rate=exchange_rate(),
         prices_date=cards_date(),
+        shipping=shipping_rules(optional_config()),
     )
 
 

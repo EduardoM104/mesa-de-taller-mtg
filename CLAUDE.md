@@ -166,7 +166,10 @@ Un reporte en Markdown en `reports/` que siempre compara contra el perfil:
 
 - Moneda de trabajo: MXN. Referencias en USD de Star City Games, TCGplayer y Card Kingdom, convertidas con un tipo de cambio configurable (por defecto 18).
 - Cada tienda mexicana aplica su propia regla de conversión, así que se guarda el precio en MXN tal como la tienda lo publica.
-- Tiendas mexicanas a integrar: Yellow Rabbit, TCG Wolf (antes MTG Wolf). Candidatas a evaluar: CardTrader (tiene API y consolida envíos), TCGmercado y otras que resulten confiables.
+- Tiendas mexicanas a integrar: Yellow Rabbit, TCG Wolf (antes MTG Wolf).
+  - **Yellow Rabbit** (yellowrabbit.mx, Shopify): precios por su canal oficial para agentes (UCP, `search_catalog`). Nos identificamos con un perfil público: gist `mesa-de-taller-ucp.json` de EduardoM104, servido por githack como JSON; la dirección vive en `config.toml` ([tiendas] perfil_ucp). Solo búsqueda de catálogo, nunca carrito ni compra. Martín recoge en sucursal: sin envío.
+  - **TCG Wolf** (tcgwolf.com): sus páginas tienen reto de Cloudflare y `robots.txt` prohíbe `/api/`. No se automatiza; el reporte trae ligas de búsqueda. Envío promedio $150, gratis desde $2,200.
+  - Las reglas de envío viven en `config.toml` ([envios]). Candidatas a evaluar: CardTrader (tiene API y consolida envíos), TCGmercado y otras que resulten confiables.
 - Comparar siempre el costo total con envío, no solo el precio unitario.
 - Objetivo: completar la colección para tener muchas opciones de juego al mejor precio. No interesa la versión más cara ni la reventa.
 - Extra: lista de seguimiento para detectar cartas por debajo de su precio habitual o con riesgo de subir.
@@ -178,7 +181,7 @@ Cada fase termina cuando cumple su criterio de terminado. No empezar la siguient
 - **Fase 0. Arranque.** Repo en GitHub (privado), `uv`, estructura de carpetas, `pytest` corriendo. *Terminado:* `uv run pytest` pasa con una prueba de ejemplo.
 - **Fase 1. Analizador de mazos.** Comando `taller analizar <slug>` que lee el perfil, trae el mazo de Archidekt, cruza con Scryfall y Spellbook, y escribe el reporte. También acepta un mazo ajeno (texto exportado de Moxfield o URL de Archidekt) para compararlo contra uno propio. *Terminado:* reportes útiles para el mazo de tokens (Isshin) y para DragonSSSS! (Ureni). Aang se cambió por Ureni porque su lista en Archidekt está incompleta (decisión de Martín, 2026-10-25).
 - **Fase 2. Colección.** Importar CSV de ManaBox por caja; las sugerencias marcan "ya la tienes, está en tal caja". *Terminado:* al menos una caja importada y visible en un reporte. ✅ 2026-10-26 (Orzhov WB en el reporte de Isshin).
-- **Fase 3. Precios.** Precios de referencia y de tiendas mexicanas, lista de compra al mejor costo total. *Terminado:* lista de compra en MXN para las sugerencias de un mazo.
+- **Fase 3. Precios.** Precios de referencia y de tiendas mexicanas, lista de compra al mejor costo total. *Terminado:* lista de compra en MXN para las sugerencias de un mazo. ✅ 2026-10-26 (Isshin, con Yellow Rabbit y envío).
 - **Fase 4. Web.** Consulta de reportes, colección y lista de compra desde iPhone, iPad y la Mac del trabajo. *Terminado:* accesible con login desde el iPhone.
 - **Fase 5. Simulación y bitácora.** Simulación de partidas en solitario para estimar la ventana de victoria (prioridad: Aang en turno 3–4) e integración de la bitácora de partidas en los reportes.
 
