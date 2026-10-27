@@ -1,11 +1,241 @@
 {% extends "base.html" %}
-{% block title %}{{ profile.nombre }} · Mesa de taller{% endblock %}
+{% block title %}{{ data.header.nombre }} · Mesa de taller{% endblock %}
+
+{# Una carta como "chip"; si la tienes, abajo dice en qué caja está. #}
+{% macro chip(card) -%}
+<li class="chip{% if card.location %} chip--owned{% endif %}">
+  <span>{{ card.name }}</span>
+  {% if card.location %}<small>📦 {{ card.location }}</small>{% endif %}
+</li>
+{%- endmacro %}
+
+{% macro chips(names) -%}
+<ul class="chips">{% for name in names %}<li class="chip"><span>{{ name }}</span></li>{% endfor %}</ul>
+{%- endmacro %}
+
+{% macro pip(color) -%}
+<span class="pip pip--{{ color }}" title="{{ COLOR_NAMES[color] }}">{{ color }}</span>
+{%- endmacro %}
+
 {% block content %}
+{% set h = data.header %}
 <a class="back" href="/">← Tus mazos</a>
-{% if report_html %}
-<article class="report">{{ report_html | safe }}</article>
-{% else %}
-<h1>{{ profile.nombre }}</h1>
-<p class="muted">Todavía no hay reporte. Genéralo con <code>uv run taller analizar {{ profile.slug }}</code>.</p>
+
+<header class="deck-head">
+  <div class="deck-head__pips">{% for color in data.mana.identity %}{{ pip(color) }}{% endfor %}</div>
+  <h1>{{ h.nombre }}</h1>
+  <p class="muted">{{ h.comandante }}</p>
+  <p class="deck-head__theme">{{ h.tema }}</p>
+  <dl class="facts">
+    <div><dt>Bracket</dt><dd>{{ h.bracket or "?" }}</dd></div>
+    <div><dt>Ventana</dt><dd>{{ h.ventana or "—" }}</dd></div>
+    <div><dt>Análisis</dt><dd>{{ data.date }}</dd></div>
+  </dl>
+  <p class="small muted">
+    <a href="{{ h.archidekt_url }}">Archidekt</a> (editado {{ h.editado }}) · Colección: {{ h.coleccion | md | safe }}
+  </p>
+</header>
+
+{% if not h.sincronizada %}
+<p class="alert">⚠️ <strong>La lista de Archidekt no está confirmada contra el mazo físico.</strong> Toma esto como análisis de la lista, no del mazo que juegas.</p>
 {% endif %}
+{% if h.cartas != 100 %}<p class="alert">⚠️ La lista tiene {{ h.cartas }} cartas, no 100. El análisis está incompleto.</p>{% endif %}
+{% if h.faltantes %}<p class="alert">⚠️ No se encontraron en Scryfall: {{ h.faltantes | join(" · ") }}.</p>{% endif %}
+
+<nav class="jump">
+  <a href="#resumen">Resumen</a><a href="#roles">Roles</a><a href="#mana">Maná</a><a href="#bracket">Bracket</a>
+  <a href="#sinergia">Sinergia</a><a href="#sugerencias">Sugerencias</a><a href="#compra">Compra</a><a href="#ventana">Ventana</a>
+</nav>
+
+{# ---------- 1. Resumen ---------- #}
+<section id="resumen" class="panel">
+  <h2>Resumen</h2>
+  <div class="stats">
+    <div class="stat"><span class="stat__value">{{ data.mana.lands }}</span><span class="stat__label">tierras</span></div>
+    <div class="stat"><span class="stat__value">{{ data.mana.average }}</span><span class="stat__label">costo promedio</span></div>
+    <div class="stat"><span class="stat__value">{{ data.mana.ramp }}</span><span class="stat__label">ramp</span></div>
+    <div class="stat"><span class="stat__value">{{ data.synergy.pieces | length }}</span><span class="stat__label">piezas del tema</span></div>
+  </div>
+  <ul class="lines">{% for line in data.summary %}<li>{{ line | md | safe }}</li>{% endfor %}</ul>
+</section>
+
+<div class="two-col">
+  {# ---------- 2. Roles: barra con la franja de referencia ---------- #}
+  <section id="roles" class="panel">
+    <h2>Roles</h2>
+    <p class="small muted">La franja es el rango de referencia. Toca un rol para ver sus cartas.</p>
+    {% for role in data.roles if role.high %}
+    <details class="role role--{{ role.state }}">
+      <summary>
+        <span class="role__name">{{ role.title }}</span>
+        <span class="role__bar" title="{{ role.count }} cartas · referencia {{ role.low }}–{{ role.high }}">
+          <span class="role__band" style="left: {{ role.low / scale * 100 }}%; width: {{ (role.high - role.low) / scale * 100 }}%"></span>
+          <span class="role__fill" style="width: {{ role.count / scale * 100 }}%"></span>
+        </span>
+        <span class="role__count">{{ role.count }}<small> / {{ role.low }}–{{ role.high }}</small></span>
+        <span class="role__state">{% if role.state == "bajo" %}▼ abajo{% elif role.state == "alto" %}▲ arriba{% else %}✓ en rango{% endif %}</span>
+      </summary>
+      {{ chips(role.cards) }}
+    </details>
+    {% endfor %}
+  </section>
+
+  {# ---------- 3. Curva de maná: columnas ---------- #}
+  <section id="mana" class="panel">
+    <h2>Curva de maná</h2>
+    <p class="small muted">Sin tierras ni comandante. Costo promedio {{ data.mana.average }}.</p>
+    <div class="curve">
+      {% for bar in data.mana.curve %}
+      <div class="curve__col" title="Costo {{ bar.label }}: {{ bar.count }} cartas">
+        <span class="curve__count">{{ bar.count or "" }}</span>
+        <span class="curve__bar" style="height: {{ bar.count / curve_max * 100 }}%"></span>
+        <span class="curve__label">{{ bar.label }}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+    <h3>Fuentes por color <small class="muted">(tierras)</small></h3>
+    <ul class="sources">
+      {% for color, count in data.mana.sources.items() %}
+      <li>{{ pip(color) }}<span class="sources__bar"><span style="width: {{ count / data.mana.lands * 100 if data.mana.lands else 0 }}%"></span></span><strong>{{ count }}</strong></li>
+      {% endfor %}
+    </ul>
+    <details class="fold">
+      <summary>Tierras que entran giradas ({{ data.mana.tapped_always | length }} siempre · {{ data.mana.tapped_sometimes | length }} a veces)</summary>
+      {% if data.mana.tapped_always %}<h4>Siempre</h4>{{ chips(data.mana.tapped_always) }}{% endif %}
+      {% if data.mana.tapped_sometimes %}<h4>A veces</h4>{{ chips(data.mana.tapped_sometimes) }}{% endif %}
+    </details>
+  </section>
+</div>
+
+{# ---------- 4 y 5. Bracket y combos ---------- #}
+{% set b = data.bracket %}
+<section id="bracket" class="panel">
+  <h2>Bracket {{ b.target }}</h2>
+  {% if b.warnings %}
+    {% for warning in b.warnings %}<p class="alert">⚠️ {{ warning }}</p>{% endfor %}
+  {% else %}
+    <p class="ok">✓ Nada en la lista rompe bracket {{ b.target }}.</p>
+  {% endif %}
+  <dl class="checks">
+    <div><dt>Game Changers</dt><dd>{{ b.game_changers | length }}{% if b.limit is not none %} de {{ b.limit }}{% endif %}</dd></div>
+    <div><dt>Tutores</dt><dd>{{ b.tutors | length }}</dd></div>
+    <div><dt>Turnos extra</dt><dd>{{ b.extra_turns | length }}</dd></div>
+    <div><dt>Destrucción de tierras</dt><dd>{{ b.land_destruction | length }}</dd></div>
+    <div><dt>Combos de 2 cartas</dt><dd>{{ b.two_card_combos if b.two_card_combos is not none else "?" }}</dd></div>
+  </dl>
+  {% for label, names in [("Game Changers", b.game_changers), ("Tutores", b.tutors), ("Turnos extra", b.extra_turns), ("Destrucción de tierras", b.land_destruction)] if names %}
+  <h4>{{ label }}</h4>{{ chips(names) }}
+  {% endfor %}
+
+  <h3>Combos <small class="muted">(Commander Spellbook)</small></h3>
+  {% if data.combos is none %}
+    <p class="alert">⚠️ Spellbook no respondió; esta parte queda pendiente.</p>
+  {% else %}
+    {% if data.combos.present %}
+    <ul class="combos">{% for combo in data.combos.present %}<li><strong>{{ combo.cards | join(" + ") }}</strong> → {{ combo.result }}</li>{% endfor %}</ul>
+    {% else %}<p class="muted">Ningún combo completo en la lista.</p>{% endif %}
+    {% if data.combos.near %}
+    <details class="fold">
+      <summary>A una carta de completarse: {{ data.combos.near_total }} (los {{ data.combos.near | length }} más populares)</summary>
+      <ul class="combos">
+        {% for combo in data.combos.near %}
+        <li>Falta <strong>{{ combo.missing | join(" · ") }}</strong>: {{ combo.cards | join(" + ") }} → {{ combo.result }}
+          {% if combo.two_card %}<span class="tag tag--warn">2 cartas</span>{% endif %}</li>
+        {% endfor %}
+      </ul>
+    </details>
+    {% endif %}
+  {% endif %}
+</section>
+
+{# ---------- 6. Sinergia: grupos ordenados en lugar de un bloque de texto ---------- #}
+{% set s = data.synergy %}
+<section id="sinergia" class="panel">
+  <h2>Sinergia con el tema</h2>
+  {% if s.criteria %}
+  <div class="group">
+    <h3>Piezas del tema <span class="count">{{ s.pieces | length }}</span></h3>
+    <p class="small muted">Cartas con {{ s.criteria | join(", ") }}: el corazón del plan.</p>
+    {{ chips(s.pieces) }}
+  </div>
+  {% else %}
+  <p class="small muted">El perfil no define <code>tipos_tema</code> ni <code>etiquetas_tema</code>; se usan los roles de tokens y cierre.</p>
+  {% endif %}
+  <div class="group">
+    <h3>Además empujan el plan <span class="count">{{ (s.tokens + s.closers + s.both) | length }}</span></h3>
+    <p class="small muted">Generan tokens o cierran la partida, sin ser piezas del tema.</p>
+    {% if s.both %}<h4>Tokens y cierre</h4>{{ chips(s.both) }}{% endif %}
+    {% if s.tokens %}<h4>Tokens</h4>{{ chips(s.tokens) }}{% endif %}
+    {% if s.closers %}<h4>Cierre</h4>{{ chips(s.closers) }}{% endif %}
+  </div>
+  {% if s.without_role %}
+  <div class="group group--warn">
+    <h3>Sin rol detectado <span class="count">{{ s.without_role | length }}</span></h3>
+    <p class="small muted">No se les detectó rol ni son del tema. Revisa si se ganan su lugar.</p>
+    {{ chips(s.without_role) }}
+  </div>
+  {% endif %}
+</section>
+
+{# ---------- 7. Sugerencias: una tarjeta por idea ---------- #}
+<section id="sugerencias" class="panel">
+  <h2>Sugerencias</h2>
+  {% if not data.suggestions %}<p class="muted">Nada que sugerir: todo está en rango.</p>{% endif %}
+  <div class="suggestions">
+    {% for item in data.suggestions %}
+    <article class="suggestion suggestion--{{ item.kind }}">
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.detail }}</p>
+      {% for group in item.groups %}
+      <h4>{{ group.label }}</h4>
+      <ul class="chips">{% for card in group.cards %}{{ chip(card) }}{% endfor %}</ul>
+      {% endfor %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{# ---------- Lista de compra ---------- #}
+{% set shop = data.shopping %}
+<section id="compra" class="panel">
+  <h2>Lista de compra</h2>
+  <p class="small muted">Sugerencias del Maybeboard que no están en tu colección. Referencia: Scryfall (TCGplayer, {{ shop.prices_date }}) a {{ "%g" | format(shop.rate) }} pesos por dólar.</p>
+  {% if shop.note %}<p class="alert">⚠️ {{ shop.note }}</p>{% endif %}
+  {% if not shop["items"] %}
+  <p class="muted">Nada que comprar: no hay sugerencias del Maybeboard o ya las tienes todas.</p>
+  {% else %}
+  <ul class="buy">
+    {% for item in shop["items"] %}
+    <li class="buy__item">
+      <div class="buy__title"><strong>{{ item.name }}</strong><span class="tag">{{ item.reason }}</span></div>
+      <div class="buy__prices">
+        <div><span class="small muted">Referencia</span>
+          <span>{% if item.reference_mxn is not none %}${{ "{:,}".format(item.reference_mxn) }}{% else %}sin precio{% endif %}</span></div>
+        <div><span class="small muted">Yellow Rabbit</span>
+          {% if item.offer %}<a href="{{ item.offer.url }}"><strong>${{ "{:,.0f}".format(item.offer.price_mxn) }}</strong></a>
+            <span class="small muted">{{ item.offer.condition }}{% if item.offer.set %} · {{ item.offer.set }}{% endif %}</span>
+          {% elif shop.checked %}<span class="muted">sin stock</span>{% else %}<span class="muted">—</span>{% endif %}</div>
+      </div>
+      <div class="buy__links small">Buscar en {% for store, url in item.links.items() %}<a href="{{ url }}">{{ store }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</div>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="totals">
+    <div><span class="small muted">Total referencia</span><strong>${{ "{:,}".format(shop.reference_total) }}</strong></div>
+    <div><span class="small muted">Total Yellow Rabbit</span><strong>{% if shop.store_total is not none %}${{ "{:,.0f}".format(shop.store_total) }}{% else %}—{% endif %}</strong></div>
+  </div>
+  {% if shop.without_stock %}<p class="small muted">El total de Yellow Rabbit no incluye {{ shop.without_stock }} carta(s) sin stock.</p>{% endif %}
+  {% if shop.shipping %}
+  <h3>Costo total con envío</h3>
+  <ul class="lines">{% for line in shop.shipping %}<li>{{ line | md | safe }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% endif %}
+</section>
+
+{# ---------- 8. Ventana de victoria ---------- #}
+<section id="ventana" class="panel">
+  <h2>Ventana de victoria</h2>
+  <ul class="lines">{% for line in data.window %}<li>{{ line | md | safe }}</li>{% endfor %}</ul>
+</section>
 {% endblock %}

@@ -18,6 +18,7 @@ from taller.analysis.analyze import DeckAnalysis, analyze
 from taller.analysis.compare import compare
 from taller.analysis.compare_report import render_comparison
 from taller.analysis.report import render, shopping_items
+from taller.analysis.snapshot import save_snapshot
 from taller.collection.manabox import count_by_binder, latest_csv, read_csv
 from taller.collection.store import replace_collection
 from taller.config import load_config, manabox_dir, ucp_profile
@@ -55,6 +56,7 @@ def analizar(slug: str, refrescar: bool = REFRESH_OPTION) -> None:
     REPORTS_DIR.mkdir(exist_ok=True)
     path = REPORTS_DIR / f"{slug}-{date.today().isoformat()}.md"
     path.write_text(report, encoding="utf-8")
+    save_snapshot(analysis, path.with_suffix(".json"))  # los datos para la página web
     typer.echo(f"Reporte listo: {path}")
 
 

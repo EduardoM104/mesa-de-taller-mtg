@@ -6,6 +6,7 @@ los acomoda en las plantillas HTML de templates/. El diseño vive en
 static/style.css.
 """
 
+import json
 import re
 from pathlib import Path
 
@@ -15,6 +16,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from taller.analysis.report import COLOR_NAMES
 from taller.profiles import PROFILES_DIR, list_profiles, load_profile
 
 WEB_DIR = Path(__file__).resolve().parent
@@ -36,27 +38,48 @@ def home(request: Request):
 
 @app.get("/mazos/{slug}", response_class=HTMLResponse)
 def deck_page(request: Request, slug: str):
-    """Página de un mazo con su reporte más reciente."""
+    """Página de un mazo: la diseñada si hay datos (.json); si no, el reporte Markdown."""
     if not SLUG.match(slug) or not (PROFILES_DIR / f"{slug}.yaml").exists():
         raise HTTPException(status_code=404, detail="No existe ese mazo")
     profile = load_profile(slug)
+    data_file = latest_report(slug, suffix=".json")
+    if data_file:
+        data = json.loads(data_file.read_text(encoding="utf-8"))
+        return templates.TemplateResponse(request, "deck.html", {
+            "profile": profile, "data": data, "scale": role_scale(data["roles"]),
+            "curve_max": max(bar["count"] for bar in data["mana"]["curve"]) or 1,
+        })
     report = latest_report(slug)
     report_html = render_markdown(report.read_text(encoding="utf-8")) if report else None
-    return templates.TemplateResponse(request, "deck.html", {
+    return templates.TemplateResponse(request, "deck_markdown.html", {
         "profile": profile, "report": report, "report_html": report_html,
     })
 
 
-def latest_report(slug: str, reports_dir: Path = REPORTS_DIR) -> Path | None:
-    """El reporte más reciente del mazo (no las comparaciones "-vs-")."""
-    pattern = re.compile(rf"^{re.escape(slug)}-\d{{4}}-\d{{2}}-\d{{2}}\.md$")
-    reports = sorted(path for path in reports_dir.glob(f"{slug}-*.md") if pattern.match(path.name))
+def latest_report(slug: str, reports_dir: Path = REPORTS_DIR, suffix: str = ".md") -> Path | None:
+    """El reporte (o sus datos .json) más reciente del mazo, sin las comparaciones "-vs-"."""
+    pattern = re.compile(rf"^{re.escape(slug)}-\d{{4}}-\d{{2}}-\d{{2}}{re.escape(suffix)}$")
+    reports = sorted(path for path in reports_dir.glob(f"{slug}-*{suffix}") if pattern.match(path.name))
     return reports[-1] if reports else None
+
+
+def role_scale(roles: list[dict]) -> int:
+    """El número que ocupa toda la barra: el mayor entre conteos y máximos de referencia.
+
+    Solo cuentan los roles con referencia; tokens y cierre van aparte (son el plan).
+    """
+    return max((max(role["count"], role["high"]) for role in roles if role["high"]), default=1)
 
 
 def render_markdown(text: str) -> str:
     """Convierte el reporte Markdown a HTML (con tablas)."""
     return markdown.markdown(text, extensions=["tables"])
+
+
+def markdown_inline(text: str) -> str:
+    """Una línea Markdown (negritas, ligas) a HTML, sin el párrafo que la envuelve."""
+    html = markdown.markdown(text)
+    return html.removeprefix("<p>").removesuffix("</p>")
 
 
 def report_date(report: Path) -> str:
@@ -65,3 +88,5 @@ def report_date(report: Path) -> str:
 
 
 templates.env.filters["report_date"] = report_date
+templates.env.filters["md"] = markdown_inline
+templates.env.globals["COLOR_NAMES"] = COLOR_NAMES

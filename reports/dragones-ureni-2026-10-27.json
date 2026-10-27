@@ -1,0 +1,513 @@
+{
+ "date": "2026-10-27",
+ "header": {
+  "nombre": "DragonSSSS!",
+  "comandante": "Ureni of the Unwritten",
+  "bracket": 4,
+  "ventana": "turno 4-5",
+  "tema": "Dragones Temur; rampear y poner dragones grandes sin pagar su costo",
+  "archidekt_url": "https://archidekt.com/decks/21296260",
+  "editado": "2026-09-27",
+  "coleccion": "45 cartas (ManaBox_Collection.csv, importada 2026-10-26)",
+  "sincronizada": true,
+  "cartas": 100,
+  "faltantes": []
+ },
+ "summary": [
+  "**Bracket:** nada en la lista rompe bracket 4.",
+  "**Por debajo de la referencia:** robo (9 de 10–12); wipes (0 de 2–4); protección (0 de 3–6).",
+  "**Maná:** 35 tierras, costo promedio 3.92, 20 piezas de ramp.",
+  "**Plan:** 39 piezas del tema.",
+  "**Combos:** 7 presentes; son una ruta de victoria alterna (ver sección 5).",
+  "**Para ganar en turno 4-5, el cuello de botella es el robo:** sin cartas suficientes, el plan no llega completo a tiempo."
+ ],
+ "roles": [
+  {
+   "key": "ramp",
+   "title": "Ramp",
+   "count": 20,
+   "low": 16,
+   "high": 20,
+   "state": "ok",
+   "cards": [
+    "Kodama's Reach",
+    "Cultivate",
+    "Selvala, Heart of the Wilds",
+    "Sol Ring",
+    "Will of the Temur",
+    "Savage Ventmaw",
+    "Old Gnawbone",
+    "Goldspan Dragon",
+    "Dragon's Hoard",
+    "Cursed Mirror",
+    "Talisman of Impulse",
+    "Talisman of Curiosity",
+    "Talisman of Creativity",
+    "Arcane Signet",
+    "Farseek",
+    "Three Visits",
+    "Nature's Lore",
+    "Selvala's Stampede",
+    "Goldlust Triad",
+    "Broodcaller Scourge"
+   ]
+  },
+  {
+   "key": "robo",
+   "title": "Robo",
+   "count": 9,
+   "low": 10,
+   "high": 12,
+   "state": "bajo",
+   "cards": [
+    "Temur Ascendancy",
+    "Selvala, Heart of the Wilds",
+    "Ancient Silver Dragon",
+    "Niv-Mizzet, Visionary",
+    "Niv-Mizzet, Parun",
+    "Will of the Temur",
+    "Rishkar's Expertise",
+    "Dragon's Hoard",
+    "Sylvan Library"
+   ]
+  },
+  {
+   "key": "removal",
+   "title": "Removal",
+   "count": 9,
+   "low": 8,
+   "high": 10,
+   "state": "ok",
+   "cards": [
+    "Spell Rupture",
+    "Stubborn Denial",
+    "Swan Song",
+    "Terror of the Peaks",
+    "Scourge of Valkas",
+    "Niv-Mizzet, Parun",
+    "Transcendent Dragon",
+    "Dragon Tempest",
+    "Beast Within"
+   ]
+  },
+  {
+   "key": "wipes",
+   "title": "Wipes",
+   "count": 0,
+   "low": 2,
+   "high": 4,
+   "state": "bajo",
+   "cards": []
+  },
+  {
+   "key": "protección",
+   "title": "Protección",
+   "count": 0,
+   "low": 3,
+   "high": 6,
+   "state": "bajo",
+   "cards": []
+  },
+  {
+   "key": "tokens",
+   "title": "Tokens",
+   "count": 3,
+   "low": null,
+   "high": null,
+   "state": null,
+   "cards": [
+    "Molten Echoes",
+    "Miirym, Sentinel Wyrm",
+    "Utvara Hellkite"
+   ]
+  },
+  {
+   "key": "cierre",
+   "title": "Cierre",
+   "count": 4,
+   "low": null,
+   "high": null,
+   "state": null,
+   "cards": [
+    "Temur Ascendancy",
+    "Finale of Devastation",
+    "Hellkite Charger",
+    "Aggravated Assault"
+   ]
+  }
+ ],
+ "mana": {
+  "lands": 35,
+  "average": 3.92,
+  "ramp": 20,
+  "curve": [
+   {
+    "label": "0",
+    "count": 0
+   },
+   {
+    "label": "1",
+    "count": 5
+   },
+   {
+    "label": "2",
+    "count": 14
+   },
+   {
+    "label": "3",
+    "count": 11
+   },
+   {
+    "label": "4",
+    "count": 9
+   },
+   {
+    "label": "5",
+    "count": 7
+   },
+   {
+    "label": "6",
+    "count": 12
+   },
+   {
+    "label": "7+",
+    "count": 6
+   }
+  ],
+  "identity": [
+   "U",
+   "R",
+   "G"
+  ],
+  "sources": {
+   "U": 13,
+   "R": 20,
+   "G": 19
+  },
+  "tapped_always": [],
+  "tapped_sometimes": [
+   "Cinder Glade",
+   "Sulfur Falls",
+   "Hinterland Harbor",
+   "Sodden Verdure",
+   "Rootbound Crag",
+   "Stomping Ground"
+  ]
+ },
+ "bracket": {
+  "target": 4,
+  "game_changers": [
+   "Worldly Tutor",
+   "Gamble"
+  ],
+  "limit": null,
+  "tutors": [
+   "Worldly Tutor",
+   "Chord of Calling",
+   "Gamble",
+   "Nature's Rhythm",
+   "Eldritch Evolution",
+   "Finale of Devastation",
+   "Tooth and Nail",
+   "Birthing Pod",
+   "Maelstrom of the Spirit Dragon"
+  ],
+  "extra_turns": [],
+  "land_destruction": [],
+  "two_card_combos": 7,
+  "warnings": []
+ },
+ "combos": {
+  "present": [
+   {
+    "cards": [
+     "Niv-Mizzet, Parun",
+     "Niv-Mizzet, Visionary"
+    ],
+    "result": "Near-infinite damage"
+   },
+   {
+    "cards": [
+     "Aggravated Assault",
+     "Old Gnawbone"
+    ],
+    "result": "Infinite artifact ETB"
+   },
+   {
+    "cards": [
+     "Old Gnawbone",
+     "Hellkite Charger"
+    ],
+    "result": "Infinite artifact ETB"
+   },
+   {
+    "cards": [
+     "Savage Ventmaw",
+     "Aggravated Assault"
+    ],
+    "result": "Infinite combat damage"
+   },
+   {
+    "cards": [
+     "Aggravated Assault",
+     "Selvala, Heart of the Wilds"
+    ],
+    "result": "Infinite colored mana"
+   },
+   {
+    "cards": [
+     "Aggravated Assault",
+     "Nature's Will"
+    ],
+    "result": "Infinite combat damage"
+   },
+   {
+    "cards": [
+     "Hellkite Charger",
+     "Nature's Will"
+    ],
+    "result": "Infinite combat damage"
+   }
+  ],
+  "near_total": 138,
+  "near": [
+   {
+    "missing": [
+     "Hullbreaker Horror"
+    ],
+    "cards": [
+     "Hullbreaker Horror",
+     "Sol Ring"
+    ],
+    "result": "Infinite colorless mana",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Curiosity"
+    ],
+    "cards": [
+     "Curiosity",
+     "Niv-Mizzet, Parun"
+    ],
+    "result": "Infinite draw triggers",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "The Reaver Cleaver"
+    ],
+    "cards": [
+     "The Reaver Cleaver",
+     "Aggravated Assault"
+    ],
+    "result": "Infinite artifact ETB",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Ophidian Eye"
+    ],
+    "cards": [
+     "Niv-Mizzet, Parun",
+     "Ophidian Eye"
+    ],
+    "result": "Infinite card draw",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Tidespout Tyrant"
+    ],
+    "cards": [
+     "Tidespout Tyrant",
+     "Sol Ring"
+    ],
+    "result": "Infinite colorless mana",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Sword of Feast and Famine"
+    ],
+    "cards": [
+     "Sword of Feast and Famine",
+     "Aggravated Assault"
+    ],
+    "result": "Infinite combat phases",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Tandem Lookout"
+    ],
+    "cards": [
+     "Tandem Lookout",
+     "Niv-Mizzet, Parun"
+    ],
+    "result": "Infinite card draw",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Ancient Copper Dragon"
+    ],
+    "cards": [
+     "Ancient Copper Dragon",
+     "Aggravated Assault"
+    ],
+    "result": "Near-infinite colored mana",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Staff of Domination"
+    ],
+    "cards": [
+     "Staff of Domination",
+     "Selvala, Heart of the Wilds"
+    ],
+    "result": "Infinite card draw",
+    "two_card": false
+   },
+   {
+    "missing": [
+     "Neheb, the Eternal"
+    ],
+    "cards": [
+     "Neheb, the Eternal",
+     "Aggravated Assault"
+    ],
+    "result": "Infinite combat phases",
+    "two_card": false
+   }
+  ]
+ },
+ "synergy": {
+  "criteria": [
+   "Dragon",
+   "typal-dragon",
+   "sneak-creature",
+   "tutor-to-battlefield",
+   "impulse-onto-battlefield",
+   "trigger doubler"
+  ],
+  "pieces": [
+   "Ureni of the Unwritten",
+   "Chord of Calling",
+   "Nature's Rhythm",
+   "Eldritch Evolution",
+   "Finale of Devastation",
+   "Tooth and Nail",
+   "Quandrix, the Proof",
+   "Atarka, World Render",
+   "Twinflame Tyrant",
+   "Miirym, Sentinel Wyrm",
+   "Terror of the Peaks",
+   "Ancient Silver Dragon",
+   "Utvara Hellkite",
+   "Niv-Mizzet, Visionary",
+   "Scourge of Valkas",
+   "Niv-Mizzet, Parun",
+   "See the Unwritten",
+   "Hellkite Courser",
+   "Savage Ventmaw",
+   "Sneak Attack",
+   "Hellkite Charger",
+   "Old Gnawbone",
+   "Transcendent Dragon",
+   "Panharmonicon",
+   "Roaming Throne",
+   "Thundermane Dragon",
+   "Encroaching Dragonstorm",
+   "Breaching Dragonstorm",
+   "Goldspan Dragon",
+   "Dragon's Hoard",
+   "Birthing Pod",
+   "Sarkhan, Soul Aflame",
+   "Roiling Dragonstorm",
+   "Dragon Tempest",
+   "Deceptive Frostkite",
+   "Goldlust Triad",
+   "Maelstrom of the Spirit Dragon",
+   "Haven of the Spirit Dragon",
+   "Broodcaller Scourge"
+  ],
+  "tokens": [
+   "Molten Echoes"
+  ],
+  "closers": [
+   "Aggravated Assault",
+   "Temur Ascendancy"
+  ],
+  "both": [],
+  "without_role": [
+   "Reflections of Littjara",
+   "Nature's Will",
+   "Monstrous Vortex"
+  ]
+ },
+ "suggestions": [
+  {
+   "kind": "sube",
+   "title": "Sube robo",
+   "detail": "Tienes 9; la referencia es 10–12. Nada en tu Maybeboard ni en tu colección cubre este rol.",
+   "groups": []
+  },
+  {
+   "kind": "sube",
+   "title": "Sube wipes",
+   "detail": "Tienes 0; la referencia es 2–4. Nada en tu Maybeboard ni en tu colección cubre este rol.",
+   "groups": []
+  },
+  {
+   "kind": "sube",
+   "title": "Sube protección",
+   "detail": "Tienes 0; la referencia es 3–6. Nada en tu Maybeboard ni en tu colección cubre este rol.",
+   "groups": []
+  },
+  {
+   "kind": "revisa",
+   "title": "Revisa si empujan el plan",
+   "detail": "No se les detectó rol ni son piezas del tema: son candidatas a salir.",
+   "groups": [
+    {
+     "label": "Cartas",
+     "cards": [
+      {
+       "name": "Reflections of Littjara",
+       "location": null
+      },
+      {
+       "name": "Nature's Will",
+       "location": null
+      },
+      {
+       "name": "Monstrous Vortex",
+       "location": null
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "shopping": {
+  "rate": 18.0,
+  "prices_date": "2026-10-27",
+  "note": "",
+  "checked": false,
+  "items": [],
+  "reference_total": 0,
+  "store_total": null,
+  "without_stock": 0,
+  "shipping": [
+   "**TCG Wolf** (sin precios automáticos; estimado con la referencia): $0 + envío $150 (costo promedio) = **$150**. Te faltarían $2,200 para el envío gratis (desde $2,200)."
+  ]
+ },
+ "window": [
+  "**Objetivo del perfil:** turno 4-5",
+  "**Cartas de costo 0–2:** 19; **ramp:** 20; **costo promedio:** 3.92",
+  "Para ganar tan temprano importa más la consistencia que la potencia: robo suficiente, ramp barato y protección para el turno clave.",
+  "*La estimación por simulación llega en la fase 5.*"
+ ]
+}

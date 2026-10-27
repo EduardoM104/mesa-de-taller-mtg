@@ -28,4 +28,10 @@ def test_latest_report_ignores_comparisons(tmp_path):
 def test_deck_page_shows_report():
     response = client.get("/mazos/tokens-isshin")
     assert response.status_code == 200
-    assert "<table>" in response.text
+    assert "Roles" in response.text
+
+
+def test_deck_page_uses_designed_view_when_data_exists(tmp_path):
+    # Con un .json, latest_report lo encuentra igual que a los .md.
+    (tmp_path / "tokens-isshin-2026-10-27.json").write_text("{}", encoding="utf-8")
+    assert latest_report("tokens-isshin", tmp_path, suffix=".json").suffix == ".json"

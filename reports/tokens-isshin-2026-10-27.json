@@ -1,0 +1,724 @@
+{
+ "date": "2026-10-27",
+ "header": {
+  "nombre": "Tokens",
+  "comandante": "Isshin, Two Heavens as One",
+  "bracket": 3,
+  "ventana": "turno 5",
+  "tema": "Mardu de ataques y tokens; Isshin duplica los disparos de ataque",
+  "archidekt_url": "https://archidekt.com/decks/26390360",
+  "editado": "2026-10-24",
+  "coleccion": "45 cartas (ManaBox_Collection.csv, importada 2026-10-26)",
+  "sincronizada": true,
+  "cartas": 100,
+  "faltantes": []
+ },
+ "summary": [
+  "**Bracket:** nada en la lista rompe bracket 3.",
+  "**Por debajo de la referencia:** robo (7 de 10–12); wipes (1 de 2–4).",
+  "**Maná:** 34 tierras, costo promedio 3.0, 11 piezas de ramp.",
+  "**Plan:** 19 piezas del tema.",
+  "**Para ganar en turno 5, el cuello de botella es el robo:** sin cartas suficientes, el plan no llega completo a tiempo."
+ ],
+ "roles": [
+  {
+   "key": "ramp",
+   "title": "Ramp",
+   "count": 11,
+   "low": 10,
+   "high": 12,
+   "state": "ok",
+   "cards": [
+    "Talisman of Hierarchy",
+    "Boros Signet",
+    "Rakdos Signet",
+    "Talisman of Indulgence",
+    "Arcane Signet",
+    "Talisman of Conviction",
+    "The Golden Throne",
+    "Orzhov Signet",
+    "Sol Ring",
+    "Battle Hymn",
+    "Deadly Dispute"
+   ]
+  },
+  {
+   "key": "robo",
+   "title": "Robo",
+   "count": 7,
+   "low": 10,
+   "high": 12,
+   "state": "bajo",
+   "cards": [
+    "Skullclamp",
+    "Idol of Oblivion",
+    "Thunder of Unity",
+    "Neriv, Crackling Vanguard",
+    "God-Eternal Bontu",
+    "Zurgo Stormrender",
+    "Commissar Severina Raine"
+   ]
+  },
+  {
+   "key": "removal",
+   "title": "Removal",
+   "count": 11,
+   "low": 8,
+   "high": 10,
+   "state": "alto",
+   "cards": [
+    "Barrensteppe Siege",
+    "Martial Coup",
+    "Goblin Bombardment",
+    "Boros Charm",
+    "Crackling Doom",
+    "Will of the Mardu",
+    "Despark",
+    "Hellrider",
+    "Swords to Plowshares",
+    "Anguished Unmaking",
+    "Utter End"
+   ]
+  },
+  {
+   "key": "wipes",
+   "title": "Wipes",
+   "count": 1,
+   "low": 2,
+   "high": 4,
+   "state": "bajo",
+   "cards": [
+    "Martial Coup"
+   ]
+  },
+  {
+   "key": "protección",
+   "title": "Protección",
+   "count": 5,
+   "low": 3,
+   "high": 6,
+   "state": "ok",
+   "cards": [
+    "Boros Charm",
+    "Akroma's Will",
+    "Unbreakable Formation",
+    "Grand Crescendo",
+    "Ainok Strike Leader"
+   ]
+  },
+  {
+   "key": "tokens",
+   "title": "Tokens",
+   "count": 23,
+   "low": null,
+   "high": null,
+   "state": null,
+   "cards": [
+    "Martial Coup",
+    "Windcrag Siege",
+    "Infantry Shield",
+    "Assemble the Legion",
+    "Within Range",
+    "Divine Visitation",
+    "Krenko, Tin Street Kingpin",
+    "Kaya, Geist Hunter",
+    "Will of the Mardu",
+    "Call the Coppercoats",
+    "Grand Crescendo",
+    "Redoubled Stormsinger",
+    "Kambal, Profiteering Mayor",
+    "Zurgo, Thunder's Decree",
+    "Hero of Bladehold",
+    "Zurgo Stormrender",
+    "Adeline, Resplendent Cathar",
+    "Anim Pakal, Thousandth Moon",
+    "Ainok Strike Leader",
+    "Mardu Siegebreaker",
+    "Mondrak, Glory Dominus",
+    "Ocelot Pride",
+    "Goblin Rabblemaster"
+   ]
+  },
+  {
+   "key": "cierre",
+   "title": "Cierre",
+   "count": 15,
+   "low": null,
+   "high": null,
+   "state": null,
+   "cards": [
+    "All-Out Assault",
+    "Brutal Hordechief",
+    "Purphoros, God of the Forge",
+    "Within Range",
+    "Impact Tremors",
+    "Bastion of Remembrance",
+    "Thunder of Unity",
+    "Crackling Doom",
+    "Kambal, Profiteering Mayor",
+    "Elas il-Kor, Sadistic Pilgrim",
+    "Mirkwood Bats",
+    "Aurelia, the Warleader",
+    "Zurgo Stormrender",
+    "Commissar Severina Raine",
+    "Iroas, God of Victory"
+   ]
+  }
+ ],
+ "mana": {
+  "lands": 34,
+  "average": 3.0,
+  "ramp": 11,
+  "curve": [
+   {
+    "label": "0",
+    "count": 0
+   },
+   {
+    "label": "1",
+    "count": 6
+   },
+   {
+    "label": "2",
+    "count": 18
+   },
+   {
+    "label": "3",
+    "count": 19
+   },
+   {
+    "label": "4",
+    "count": 15
+   },
+   {
+    "label": "5",
+    "count": 6
+   },
+   {
+    "label": "6",
+    "count": 1
+   },
+   {
+    "label": "7+",
+    "count": 0
+   }
+  ],
+  "identity": [
+   "W",
+   "B",
+   "R"
+  ],
+  "sources": {
+   "W": 19,
+   "B": 16,
+   "R": 18
+  },
+  "tapped_always": [
+   "Shadowy Backstreet"
+  ],
+  "tapped_sometimes": [
+   "Clifftop Retreat",
+   "Dragonskull Summit",
+   "Sacred Foundry",
+   "Blood Crypt",
+   "Godless Shrine",
+   "Isolated Chapel",
+   "Minas Tirith",
+   "Haunted Ridge",
+   "Shattered Sanctum"
+  ]
+ },
+ "bracket": {
+  "target": 3,
+  "game_changers": [],
+  "limit": 3,
+  "tutors": [],
+  "extra_turns": [],
+  "land_destruction": [],
+  "two_card_combos": 0,
+  "warnings": []
+ },
+ "combos": {
+  "present": [],
+  "near_total": 30,
+  "near": [
+   {
+    "missing": [
+     "Helm of the Host"
+    ],
+    "cards": [
+     "Aurelia, the Warleader",
+     "Helm of the Host"
+    ],
+    "result": "Infinite combat phases",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Boros Reckoner"
+    ],
+    "cards": [
+     "Boros Reckoner",
+     "Boros Charm"
+    ],
+    "result": "Infinite lifegain",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Sword of Hearth and Home"
+    ],
+    "cards": [
+     "Aurelia, the Warleader",
+     "Sword of Hearth and Home"
+    ],
+    "result": "Infinite combat damage",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Plague of Vermin"
+    ],
+    "cards": [
+     "Mirkwood Bats",
+     "Plague of Vermin"
+    ],
+    "result": "Each opponent loses the game",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Reiterate"
+    ],
+    "cards": [
+     "Reiterate",
+     "Battle Hymn"
+    ],
+    "result": "Infinite magecraft triggers",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Storm Herd"
+    ],
+    "cards": [
+     "Storm Herd",
+     "Impact Tremors"
+    ],
+    "result": "Near-infinite creature ETB",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Breath of Fury"
+    ],
+    "cards": [
+     "Breath of Fury",
+     "Goblin Rabblemaster"
+    ],
+    "result": "Infinite combat damage",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Rionya, Fire Dancer"
+    ],
+    "cards": [
+     "Aurelia, the Warleader",
+     "Rionya, Fire Dancer"
+    ],
+    "result": "Infinite combat phases",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Storm Herd"
+    ],
+    "cards": [
+     "Storm Herd",
+     "Purphoros, God of the Forge"
+    ],
+    "result": "Near-infinite creature ETB",
+    "two_card": true
+   },
+   {
+    "missing": [
+     "Restoration Angel"
+    ],
+    "cards": [
+     "Mardu Siegebreaker",
+     "Restoration Angel"
+    ],
+    "result": "Infinite creature LTB",
+    "two_card": true
+   }
+  ]
+ },
+ "synergy": {
+  "criteria": [
+   "attack trigger"
+  ],
+  "pieces": [
+   "All-Out Assault",
+   "Brutal Hordechief",
+   "Infantry Shield",
+   "Within Range",
+   "Krenko, Tin Street Kingpin",
+   "Neriv, Crackling Vanguard",
+   "Redoubled Stormsinger",
+   "Zurgo, Thunder's Decree",
+   "Ironwill Forger",
+   "Aurelia, the Warleader",
+   "Hero of Bladehold",
+   "Zurgo Stormrender",
+   "Hellrider",
+   "Adeline, Resplendent Cathar",
+   "Anim Pakal, Thousandth Moon",
+   "Ainok Strike Leader",
+   "Mardu Siegebreaker",
+   "Commissar Severina Raine",
+   "Goblin Rabblemaster"
+  ],
+  "tokens": [
+   "Assemble the Legion",
+   "Call the Coppercoats",
+   "Divine Visitation",
+   "Grand Crescendo",
+   "Kaya, Geist Hunter",
+   "Martial Coup",
+   "Mondrak, Glory Dominus",
+   "Ocelot Pride",
+   "Will of the Mardu",
+   "Windcrag Siege"
+  ],
+  "closers": [
+   "Bastion of Remembrance",
+   "Crackling Doom",
+   "Elas il-Kor, Sadistic Pilgrim",
+   "Impact Tremors",
+   "Iroas, God of Victory",
+   "Mirkwood Bats",
+   "Purphoros, God of the Forge",
+   "Thunder of Unity"
+  ],
+  "both": [
+   "Kambal, Profiteering Mayor"
+  ],
+  "without_role": [
+   "Smile at Death",
+   "Corrupted Conviction",
+   "Ogre Battledriver",
+   "Faithless Looting"
+  ]
+ },
+ "suggestions": [
+  {
+   "kind": "sube",
+   "title": "Sube robo",
+   "detail": "Tienes 7; la referencia es 10–12.",
+   "groups": [
+    {
+     "label": "En tu Maybeboard",
+     "cards": [
+      {
+       "name": "Caesar, Legion's Emperor",
+       "location": null
+      },
+      {
+       "name": "Mentor of the Meek",
+       "location": null
+      },
+      {
+       "name": "Welcoming Vampire",
+       "location": null
+      }
+     ]
+    },
+    {
+     "label": "En tu colección (detectadas por texto, revisa que encajen)",
+     "cards": [
+      {
+       "name": "Frodo, Adventurous Hobbit",
+       "location": "Orzhov WB"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "sube",
+   "title": "Sube wipes",
+   "detail": "Tienes 1; la referencia es 2–4. Nada en tu Maybeboard ni en tu colección cubre este rol.",
+   "groups": []
+  },
+  {
+   "kind": "margen",
+   "title": "Removal tiene margen",
+   "detail": "Tienes 11; la referencia es 8–10. De aquí puedes liberar espacios.",
+   "groups": [
+    {
+     "label": "Cartas del rol",
+     "cards": [
+      {
+       "name": "Barrensteppe Siege",
+       "location": null
+      },
+      {
+       "name": "Martial Coup",
+       "location": null
+      },
+      {
+       "name": "Goblin Bombardment",
+       "location": null
+      },
+      {
+       "name": "Boros Charm",
+       "location": null
+      },
+      {
+       "name": "Crackling Doom",
+       "location": null
+      },
+      {
+       "name": "Will of the Mardu",
+       "location": null
+      },
+      {
+       "name": "Despark",
+       "location": null
+      },
+      {
+       "name": "Hellrider",
+       "location": null
+      },
+      {
+       "name": "Swords to Plowshares",
+       "location": null
+      },
+      {
+       "name": "Anguished Unmaking",
+       "location": null
+      },
+      {
+       "name": "Utter End",
+       "location": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "gc",
+   "title": "Te quedan 3 espacio(s) de Game Changer",
+   "detail": "En bracket 3; úsalos en consistencia (robo, protección, ramp).",
+   "groups": [
+    {
+     "label": "En tu Maybeboard",
+     "cards": [
+      {
+       "name": "Teferi's Protection",
+       "location": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "revisa",
+   "title": "Revisa si empujan el plan",
+   "detail": "No se les detectó rol ni son piezas del tema: son candidatas a salir.",
+   "groups": [
+    {
+     "label": "Cartas",
+     "cards": [
+      {
+       "name": "Smile at Death",
+       "location": null
+      },
+      {
+       "name": "Corrupted Conviction",
+       "location": null
+      },
+      {
+       "name": "Ogre Battledriver",
+       "location": null
+      },
+      {
+       "name": "Faithless Looting",
+       "location": null
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "kind": "evita",
+   "title": "Evita agregar",
+   "detail": "Completarían un combo de dos cartas y sacarían el mazo de bracket 3.",
+   "groups": [
+    {
+     "label": "Cartas",
+     "cards": [
+      {
+       "name": "Appa, Loyal Sky Bison",
+       "location": null
+      },
+      {
+       "name": "Boros Reckoner",
+       "location": null
+      },
+      {
+       "name": "Breath of Fury",
+       "location": null
+      },
+      {
+       "name": "Felidar Guardian",
+       "location": null
+      },
+      {
+       "name": "Gilraen, Dúnedain Protector",
+       "location": null
+      },
+      {
+       "name": "Helm of the Host",
+       "location": null
+      },
+      {
+       "name": "Plague of Vermin",
+       "location": null
+      },
+      {
+       "name": "Port Razer",
+       "location": null
+      },
+      {
+       "name": "Raptor Hatchling",
+       "location": null
+      },
+      {
+       "name": "Reiterate",
+       "location": null
+      },
+      {
+       "name": "Restoration Angel",
+       "location": null
+      },
+      {
+       "name": "Rionya, Fire Dancer",
+       "location": null
+      },
+      {
+       "name": "Sandstorm Crasher",
+       "location": null
+      },
+      {
+       "name": "Spawnsire of Ulamog",
+       "location": null
+      },
+      {
+       "name": "Storm Herd",
+       "location": null
+      },
+      {
+       "name": "Sword of Hearth and Home",
+       "location": null
+      },
+      {
+       "name": "The Neutrinos",
+       "location": null
+      },
+      {
+       "name": "Tooth and Claw",
+       "location": null
+      },
+      {
+       "name": "Wispweaver Angel",
+       "location": null
+      },
+      {
+       "name": "Éomer, Marshal of Rohan",
+       "location": null
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "shopping": {
+  "rate": 18.0,
+  "prices_date": "2026-10-27",
+  "note": "",
+  "checked": true,
+  "items": [
+   {
+    "name": "Welcoming Vampire",
+    "reason": "robo",
+    "reference_mxn": 47,
+    "price_usd": 2.63,
+    "offer": null,
+    "links": {
+     "Yellow Rabbit": "https://yellowrabbit.mx/search?q=Welcoming+Vampire",
+     "TCG Wolf": "https://www.tcgwolf.com/buscar?q=Welcoming+Vampire"
+    }
+   },
+   {
+    "name": "Mentor of the Meek",
+    "reason": "robo",
+    "reference_mxn": 85,
+    "price_usd": 4.72,
+    "offer": {
+     "title": "Mentor of the Meek (Retro Frame) [Innistrad Remastered]",
+     "condition": "NM",
+     "price_mxn": 15.0,
+     "url": "https://yellowrabbit.mx/products/mentor-of-the-meek-retro-frame-innistrad-remastered",
+     "set": "Innistrad Remastered"
+    },
+    "links": {
+     "Yellow Rabbit": "https://yellowrabbit.mx/search?q=Mentor+of+the+Meek",
+     "TCG Wolf": "https://www.tcgwolf.com/buscar?q=Mentor+of+the+Meek"
+    }
+   },
+   {
+    "name": "Teferi's Protection",
+    "reason": "Game Changer",
+    "reference_mxn": 844,
+    "price_usd": 46.87,
+    "offer": {
+     "title": "T'Challa's Protection - Teferi's Protection (Borderless) [Marvel Universe: Eternal-Legal]",
+     "condition": "NM",
+     "price_mxn": 805.0,
+     "url": "https://yellowrabbit.mx/products/tchallas-protection-teferis-protection-borderless-marvel-universe-eternal-legal",
+     "set": "Marvel Universe: Eternal-Legal"
+    },
+    "links": {
+     "Yellow Rabbit": "https://yellowrabbit.mx/search?q=Teferi%27s+Protection",
+     "TCG Wolf": "https://www.tcgwolf.com/buscar?q=Teferi%27s+Protection"
+    }
+   },
+   {
+    "name": "Caesar, Legion's Emperor",
+    "reason": "robo",
+    "reference_mxn": null,
+    "price_usd": null,
+    "offer": null,
+    "links": {
+     "Yellow Rabbit": "https://yellowrabbit.mx/search?q=Caesar%2C+Legion%27s+Emperor",
+     "TCG Wolf": "https://www.tcgwolf.com/buscar?q=Caesar%2C+Legion%27s+Emperor"
+    }
+   }
+  ],
+  "reference_total": 976,
+  "store_total": 820.0,
+  "without_stock": 2,
+  "shipping": [
+   "**Yellow Rabbit:** $820 + envío $0 (recoger en sucursal) = **$820**",
+   "**TCG Wolf** (sin precios automáticos; estimado con la referencia): $976 + envío $150 (costo promedio) = **$1,126**. Te faltarían $1,224 para el envío gratis (desde $2,200)."
+  ]
+ },
+ "window": [
+  "**Objetivo del perfil:** turno 5",
+  "**Cartas de costo 0–2:** 24; **ramp:** 11; **costo promedio:** 3.0",
+  "Para ganar tan temprano importa más la consistencia que la potencia: robo suficiente, ramp barato y protección para el turno clave.",
+  "*La estimación por simulación llega en la fase 5.*"
+ ]
+}
