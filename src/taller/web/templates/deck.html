@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ profile.nombre }} · Mesa de taller{% endblock %}
+{% block content %}
+<a class="back" href="/">← Tus mazos</a>
+{% if report_html %}
+<article class="report">{{ report_html | safe }}</article>
+{% else %}
+<h1>{{ profile.nombre }}</h1>
+<p class="muted">Todavía no hay reporte. Genéralo con <code>uv run taller analizar {{ profile.slug }}</code>.</p>
+{% endif %}
+{% endblock %}

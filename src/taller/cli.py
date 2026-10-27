@@ -3,6 +3,7 @@
 Ejemplos:
     uv run taller analizar tokens-isshin
     uv run taller coleccion importar
+    uv run taller web
 """
 
 import re
@@ -11,6 +12,7 @@ from pathlib import Path
 
 import httpx
 import typer
+import uvicorn
 
 from taller.analysis.analyze import DeckAnalysis, analyze
 from taller.analysis.compare import compare
@@ -96,6 +98,13 @@ def importar(archivo: Path | None = typer.Argument(None, help="CSV de ManaBox; s
     unresolved = sorted({card.name for card in cards if card.name.lower() not in oracle_ids})
     if unresolved:
         typer.echo(f"Sin encontrar en Scryfall ({len(unresolved)}): {', '.join(unresolved)}")
+
+
+@app.command()
+def web(puerto: int = typer.Option(8000, help="Puerto local.")) -> None:
+    """Abre la página web en tu Mac: http://127.0.0.1:8000"""
+    # Solo 127.0.0.1: la página no se ve desde otras computadoras de la red.
+    uvicorn.run("taller.web.app:app", host="127.0.0.1", port=puerto)
 
 
 def add_store_prices(analysis: DeckAnalysis, refresh: bool = False) -> None:

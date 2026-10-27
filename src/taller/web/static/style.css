@@ -1,0 +1,148 @@
+/* Diseño de la mesa de taller.
+   Primero para pantalla de celular; las reglas @media agregan lo de pantalla grande.
+   Los colores son variables: el modo oscuro solo cambia sus valores. */
+
+:root {
+  --bg: #f6f4ef;
+  --surface: #ffffff;
+  --text: #1d1b18;
+  --muted: #6b665d;
+  --border: #e3dfd6;
+  --accent: #8a5a00;
+  --warn-bg: #fff3d6;
+  --warn-text: #7a4b00;
+  --radius: 12px;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141311;
+    --surface: #1f1d1a;
+    --text: #f1ede6;
+    --muted: #a39d92;
+    --border: #34312c;
+    --accent: #e0a940;
+    --warn-bg: #3a2e14;
+    --warn-text: #f0c46a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.5;
+}
+
+a { color: var(--accent); }
+
+.topbar {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.brand {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 { font-size: 1.6rem; margin: 8px 0 16px; }
+
+.muted { color: var(--muted); }
+
+/* ---------- Portada ---------- */
+
+.deck-grid {
+  display: grid;
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .deck-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.deck-card {
+  display: block;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.deck-card:hover { border-color: var(--accent); }
+
+.deck-card h2 { font-size: 1.2rem; margin: 10px 0 2px; }
+.deck-card p { margin: 0; }
+
+.deck-card__top { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.badge {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.badge--warn { background: var(--warn-bg); color: var(--warn-text); border-color: transparent; }
+
+.facts {
+  display: flex;
+  gap: 24px;
+  margin: 12px 0 0;
+}
+
+.facts dt { font-size: 0.75rem; color: var(--muted); }
+.facts dd { margin: 0; font-weight: 600; }
+
+/* ---------- Reporte ---------- */
+
+.back { display: inline-block; margin-bottom: 8px; text-decoration: none; }
+
+.report h2 {
+  font-size: 1.2rem;
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.report blockquote {
+  margin: 12px 0;
+  padding: 10px 14px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  border-radius: 8px;
+}
+
+.report blockquote p { margin: 0; }
+
+/* Las tablas anchas se desplazan de lado en el celular en lugar de romper la página. */
+.report table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.report th, .report td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.report code { font-size: 0.9em; }

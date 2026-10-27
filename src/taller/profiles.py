@@ -52,3 +52,9 @@ def load_profile(slug: str, profiles_dir: Path = PROFILES_DIR) -> DeckProfile:
     if profile.slug != slug:
         raise ValueError(f"El archivo {path.name} dice slug '{profile.slug}'")
     return profile
+
+
+def list_profiles(profiles_dir: Path = PROFILES_DIR) -> list[DeckProfile]:
+    """Todos los perfiles de decks/profiles, ordenados por nombre del mazo."""
+    profiles = [load_profile(path.stem, profiles_dir) for path in profiles_dir.glob("*.yaml")]
+    return sorted(profiles, key=lambda profile: profile.nombre.lower())

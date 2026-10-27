@@ -67,7 +67,7 @@ Martín está aprendiendo a programar y sabe cosas básicas. Quiere dar seguimie
 - Python 3.12 con `uv` para dependencias y entornos.
 - SQLite como base de datos local (`data/taller.db`).
 - `httpx` para HTTP, `pydantic` para modelos, `pytest` para pruebas, `typer` para la línea de comandos.
-- Web (fase 4): por decidir entre Streamlit y Next.js, y el hosting. No adelantar esta decisión.
+- Web (fase 4): FastAPI + plantillas HTML (Jinja2) + CSS propio, diseñada desde el inicio para Mac y iPhone. Corre en la Mac de Martín (`taller web`, solo en 127.0.0.1); para el iPhone se usa Tailscale (red privada, sin exponer nada a internet). Decisión de Martín, 2026-10-26: le interesa el diseño, por eso no Streamlit; y no Next.js para no sumar otro lenguaje.
 
 ## Estructura
 

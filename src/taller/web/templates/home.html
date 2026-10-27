@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Tus mazos</h1>
+<div class="deck-grid">
+  {% for deck in decks %}
+  {% set profile = deck.profile %}
+  <a class="deck-card" href="/mazos/{{ profile.slug }}">
+    <div class="deck-card__top">
+      <span class="badge">Bracket {{ profile.bracket or "?" }}</span>
+      {% if not profile.lista_sincronizada %}<span class="badge badge--warn">Lista sin confirmar</span>{% endif %}
+    </div>
+    <h2>{{ profile.nombre }}</h2>
+    <p class="muted">{{ profile.comandante }}</p>
+    <dl class="facts">
+      <div><dt>Ventana</dt><dd>{{ profile.ventana_victoria or "—" }}</dd></div>
+      <div><dt>Reporte</dt><dd>{{ deck.report | report_date if deck.report else "sin reporte" }}</dd></div>
+    </dl>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}
