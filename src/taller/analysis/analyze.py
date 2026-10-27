@@ -51,6 +51,9 @@ class DeckAnalysis:
     # Precios: tipo de cambio de config.toml y fecha de los precios de Scryfall.
     exchange_rate: float = DEFAULT_EXCHANGE_RATE
     prices_date: str | None = None
+    # Ofertas de Yellow Rabbit para la lista de compra; None si no se consultó.
+    store_offers: dict | None = None
+    store_note: str = ""  # por qué no hay precios de tienda, si no los hay
 
 
 def analyze(profile: DeckProfile, refresh: bool = False) -> DeckAnalysis:

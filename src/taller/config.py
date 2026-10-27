@@ -35,3 +35,10 @@ def exchange_rate(path: Path = CONFIG_PATH) -> float:
     if not path.exists():
         return DEFAULT_EXCHANGE_RATE
     return float(load_config(path).get("precios", {}).get("tipo_de_cambio", DEFAULT_EXCHANGE_RATE))
+
+
+def ucp_profile(path: Path = CONFIG_PATH) -> str | None:
+    """Dirección del perfil público con el que nos identificamos ante las tiendas (UCP)."""
+    if not path.exists():
+        return None
+    return load_config(path).get("tiendas", {}).get("perfil_ucp")

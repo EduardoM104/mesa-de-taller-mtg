@@ -1,0 +1,590 @@
+{
+ "jsonrpc": "2.0",
+ "id": 1,
+ "result": {
+  "isError": false,
+  "structuredContent": {
+   "products": [
+    {
+     "id": "gid://shopify/Product/9953694744891",
+     "title": "Mentor of the Meek [Innistrad Remastered]",
+     "url": "https://yellowrabbit.mx/products/mentor-of-the-meek-innistrad-remastered",
+     "handle": "mentor-of-the-meek-innistrad-remastered",
+     "price_range": {
+      "min": {
+       "amount": 900,
+       "currency": "MXN"
+      },
+      "max": {
+       "amount": 1500,
+       "currency": "MXN"
+      }
+     },
+     "variants": [
+      {
+       "id": "gid://shopify/ProductVariant/49924405395771",
+       "sku": "INR-34-EN-NF-1",
+       "title": "Near Mint",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 1500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": true
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405428539",
+       "sku": "INR-34-EN-NF-2",
+       "title": "Lightly Played",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 1425,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405461307",
+       "sku": "INR-34-EN-NF-3",
+       "title": "Moderately Played",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 1275,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405494075",
+       "sku": "INR-34-EN-NF-4",
+       "title": "Heavily Played",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 975,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405526843",
+       "sku": "INR-34-EN-NF-5",
+       "title": "Damaged",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 900,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405559611",
+       "sku": "INR-34-EN-FO-1",
+       "title": "Near Mint Foil",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 1500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": true
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405592379",
+       "sku": "INR-34-EN-FO-2",
+       "title": "Lightly Played Foil",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 1425,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405625147",
+       "sku": "INR-34-EN-FO-3",
+       "title": "Moderately Played Foil",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 1275,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405657915",
+       "sku": "INR-34-EN-FO-4",
+       "title": "Heavily Played Foil",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 975,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49924405690683",
+       "sku": "INR-34-EN-FO-5",
+       "title": "Damaged Foil",
+       "description": {
+        "html": "Set: Innistrad Remastered Type: Creature — Human Soldier Rarity: Uncommon Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. In these halls there is no pass or fail. Your true test comes with the first full moon."
+       },
+       "price": {
+        "amount": 900,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/b935659a-ba1a-5613-98fa-189fbbb911a7.png?v=1738959579"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "gid://shopify/Product/9854271357243",
+     "title": "Mentor of the Meek [Foundations]",
+     "url": "https://yellowrabbit.mx/products/mentor-of-the-meek-foundations",
+     "handle": "mentor-of-the-meek-foundations",
+     "price_range": {
+      "min": {
+       "amount": 600,
+       "currency": "MXN"
+      },
+      "max": {
+       "amount": 2000,
+       "currency": "MXN"
+      }
+     },
+     "variants": [
+      {
+       "id": "gid://shopify/ProductVariant/49627858960699",
+       "sku": "FDN-578-EN-NF-1",
+       "title": "Near Mint",
+       "description": {
+        "html": "Set: Foundations Type: Creature — Human Soldier Rarity: Rare Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. \"In these halls there is no pass or fail. Your true test comes with the first full moon.\""
+       },
+       "price": {
+        "amount": 2000,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": true
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/754ed151-8b85-53ba-b4eb-a1d6e6628275.png?v=1739301067"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49627858993467",
+       "sku": "FDN-578-EN-NF-2",
+       "title": "Lightly Played",
+       "description": {
+        "html": "Set: Foundations Type: Creature — Human Soldier Rarity: Rare Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. \"In these halls there is no pass or fail. Your true test comes with the first full moon.\""
+       },
+       "price": {
+        "amount": 1700,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/754ed151-8b85-53ba-b4eb-a1d6e6628275.png?v=1739301067"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49627859026235",
+       "sku": "FDN-578-EN-NF-3",
+       "title": "Moderately Played",
+       "description": {
+        "html": "Set: Foundations Type: Creature — Human Soldier Rarity: Rare Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. \"In these halls there is no pass or fail. Your true test comes with the first full moon.\""
+       },
+       "price": {
+        "amount": 1400,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/754ed151-8b85-53ba-b4eb-a1d6e6628275.png?v=1739301067"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49627859059003",
+       "sku": "FDN-578-EN-NF-4",
+       "title": "Heavily Played",
+       "description": {
+        "html": "Set: Foundations Type: Creature — Human Soldier Rarity: Rare Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. \"In these halls there is no pass or fail. Your true test comes with the first full moon.\""
+       },
+       "price": {
+        "amount": 1000,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/754ed151-8b85-53ba-b4eb-a1d6e6628275.png?v=1739301067"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/49627859091771",
+       "sku": "FDN-578-EN-NF-5",
+       "title": "Damaged",
+       "description": {
+        "html": "Set: Foundations Type: Creature — Human Soldier Rarity: Rare Cost: {2}{W} Whenever another creature you control with power 2 or less enters, you may pay {1}. If you do, draw a card. \"In these halls there is no pass or fail. Your true test comes with the first full moon.\""
+       },
+       "price": {
+        "amount": 600,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/754ed151-8b85-53ba-b4eb-a1d6e6628275.png?v=1739301067"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "gid://shopify/Product/8353362837819",
+     "title": "Monastery Mentor (Extended Art) [March of the Machine]",
+     "url": "https://yellowrabbit.mx/products/monastery-mentor-extended-art-march-of-the-machine",
+     "handle": "monastery-mentor-extended-art-march-of-the-machine",
+     "price_range": {
+      "min": {
+       "amount": 3500,
+       "currency": "MXN"
+      },
+      "max": {
+       "amount": 5500,
+       "currency": "MXN"
+      }
+     },
+     "variants": [
+      {
+       "id": "gid://shopify/ProductVariant/45110290284859",
+       "sku": "MOM-347-EN-NF-1",
+       "title": "Near Mint",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 5500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": true
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290317627",
+       "sku": "MOM-347-EN-NF-2",
+       "title": "Lightly Played",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 5000,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290350395",
+       "sku": "MOM-347-EN-NF-3",
+       "title": "Moderately Played",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 4500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290383163",
+       "sku": "MOM-347-EN-NF-4",
+       "title": "Heavily Played",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 3500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290415931",
+       "sku": "MOM-347-EN-NF-5",
+       "title": "Damaged",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 3500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290448699",
+       "sku": "MOM-347-EN-FO-1",
+       "title": "Near Mint Foil",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 5500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290514235",
+       "sku": "MOM-347-EN-FO-2",
+       "title": "Lightly Played Foil",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 5500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290579771",
+       "sku": "MOM-347-EN-FO-3",
+       "title": "Moderately Played Foil",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 5000,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290645307",
+       "sku": "MOM-347-EN-FO-4",
+       "title": "Heavily Played Foil",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 4000,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      },
+      {
+       "id": "gid://shopify/ProductVariant/45110290710843",
+       "sku": "MOM-347-EN-FO-5",
+       "title": "Damaged Foil",
+       "description": {
+        "html": "Set: March of the Machine Type: Creature — Human Monk Rarity: Mythic Cost: {2}{W} Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)Whenever you cast a noncreature spell, create a 1/1 white Monk creature token with prowess."
+       },
+       "price": {
+        "amount": 3500,
+        "currency": "MXN"
+       },
+       "availability": {
+        "available": false
+       },
+       "media": [
+        {
+         "type": "image",
+         "url": "https://cdn.shopify.com/s/files/1/0757/5211/2443/files/da580303-4dd5-5237-8e1a-ffaa8ba3cbb1.png?v=1731681467"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

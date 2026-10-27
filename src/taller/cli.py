@@ -9,15 +9,17 @@ import re
 from datetime import date
 from pathlib import Path
 
+import httpx
 import typer
 
-from taller.analysis.analyze import analyze
+from taller.analysis.analyze import DeckAnalysis, analyze
 from taller.analysis.compare import compare
 from taller.analysis.compare_report import render_comparison
-from taller.analysis.report import render
+from taller.analysis.report import render, shopping_items
 from taller.collection.manabox import count_by_binder, latest_csv, read_csv
 from taller.collection.store import replace_collection
-from taller.config import load_config, manabox_dir
+from taller.config import load_config, manabox_dir, ucp_profile
+from taller.prices import yellow_rabbit
 from taller.profiles import load_profile
 from taller.sources.decklist import load_other_deck
 from taller.sources.scryfall import find_cards_by_name, update_cards
@@ -44,7 +46,9 @@ def analizar(slug: str, refrescar: bool = REFRESH_OPTION) -> None:
     """Analiza el mazo del perfil <slug> y escribe el reporte en reports/."""
     profile = load_profile(slug)
     typer.echo(f"Analizando {profile.nombre}...")
-    report = render(analyze(profile, refresh=refrescar))
+    analysis = analyze(profile, refresh=refrescar)
+    add_store_prices(analysis, refresh=refrescar)
+    report = render(analysis)
 
     REPORTS_DIR.mkdir(exist_ok=True)
     path = REPORTS_DIR / f"{slug}-{date.today().isoformat()}.md"
@@ -92,6 +96,22 @@ def importar(archivo: Path | None = typer.Argument(None, help="CSV de ManaBox; s
     unresolved = sorted({card.name for card in cards if card.name.lower() not in oracle_ids})
     if unresolved:
         typer.echo(f"Sin encontrar en Scryfall ({len(unresolved)}): {', '.join(unresolved)}")
+
+
+def add_store_prices(analysis: DeckAnalysis, refresh: bool = False) -> None:
+    """Consulta Yellow Rabbit para la lista de compra. Si no se puede, deja una nota."""
+    names = [item.name for item in shopping_items(analysis)]
+    if not names:
+        return
+    profile_url = ucp_profile()
+    if not profile_url:
+        analysis.store_note = "Sin precios de Yellow Rabbit: falta `perfil_ucp` en la sección [tiendas] de config.toml."
+        return
+    typer.echo(f"Consultando Yellow Rabbit ({len(names)} cartas)...")
+    try:
+        analysis.store_offers = yellow_rabbit.best_offers(names, profile_url, refresh=refresh)
+    except httpx.HTTPError as error:
+        analysis.store_note = f"Yellow Rabbit no respondió ({error}); usa las ligas de búsqueda."
 
 
 def slugify(text: str) -> str:

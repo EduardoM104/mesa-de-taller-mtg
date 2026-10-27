@@ -11,7 +11,7 @@ from taller.analysis.bracket import MAX_GAME_CHANGERS
 from taller.analysis.collection import with_location
 from taller.analysis.pairing import is_land
 from taller.analysis.roles import group_by_role
-from taller.prices.shopping import shopping_list, total_usd, usd_to_mxn
+from taller.prices.shopping import ShoppingItem, shopping_list, total_usd, usd_to_mxn
 from taller.prices.stores import search_links
 
 ROLE_TITLES = {
@@ -325,31 +325,65 @@ def shopping_candidates(analysis: DeckAnalysis) -> dict[str, list[str]]:
     return candidates
 
 
+def shopping_items(analysis: DeckAnalysis) -> list[ShoppingItem]:
+    """Las sugerencias del Maybeboard que no tienes, de la más barata a la más cara."""
+    return shopping_list(shopping_candidates(analysis), analysis.maybe_entries, analysis.owned)
+
+
 def shopping_section(analysis: DeckAnalysis) -> list[str]:
-    """Tabla con las sugerencias que no tienes, de la más barata a la más cara."""
+    """Tabla con las sugerencias que no tienes: precio de referencia y de Yellow Rabbit."""
     rate = analysis.exchange_rate
-    items = shopping_list(shopping_candidates(analysis), analysis.maybe_entries, analysis.owned)
+    items = shopping_items(analysis)
     lines = [
         "### Lista de compra",
         "",
-        f"Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall "
-        f"(TCGplayer, {analysis.prices_date}), tipo de cambio {rate:g}. Las ligas buscan la carta en "
-        "cada tienda para ver su precio en pesos.",
-        "",
+        f"Sugerencias del Maybeboard que no están en tu colección. Referencia: Scryfall "
+        f"(TCGplayer, {analysis.prices_date}) a {rate:g} pesos por dólar. Yellow Rabbit: la copia más "
+        "barata en stock (NM o LP).",
     ]
+    if analysis.store_note:
+        lines += ["", f"> ⚠️ {analysis.store_note}"]
+    lines.append("")
     if not items:
         return lines + ["Nada que comprar: no hay sugerencias del Maybeboard o ya las tienes todas."]
 
-    lines += ["| Carta | Para | USD | MXN aprox. | Tiendas |", "| --- | --- | --- | --- | --- |"]
+    offers = analysis.store_offers or {}
+    lines += ["| Carta | Para | Referencia | Yellow Rabbit | Buscar |", "| --- | --- | --- | --- | --- |"]
     for item in items:
-        if item.price_usd is None:
-            prices = "sin precio | —"
-        else:
-            prices = f"{item.price_usd:.2f} | ${usd_to_mxn(item.price_usd, rate):,}"
-        lines.append(f"| {item.name} | {item.reason} | {prices} | {store_links(item.name)} |")
-    total = total_usd(items)
-    lines.append(f"| **Total** | | **{total:.2f}** | **${usd_to_mxn(total, rate):,}** | |")
+        lines.append(f"| {item.name} | {item.reason} | {reference_text(item.price_usd, rate)} | "
+                     f"{offer_text(item.name, analysis.store_offers)} | {store_links(item.name)} |")
+
+    reference_total = f"${usd_to_mxn(total_usd(items), rate):,}"
+    found = [offers[item.name] for item in items if offers.get(item.name)]
+    store_total = f"${sum(offer.price_mxn for offer in found):,.0f}" if found else "—"
+    lines.append(f"| **Total** | | **{reference_total}** | **{store_total}** | |")
+    if analysis.store_offers is not None and len(found) < len(items):
+        lines += ["", f"El total de Yellow Rabbit no incluye {len(items) - len(found)} carta(s) sin stock."]
     return lines
+
+
+def reference_text(price_usd: float | None, rate: float) -> str:
+    """"$85 (4.72 USD)", o "sin precio"."""
+    if price_usd is None:
+        return "sin precio"
+    return f"${usd_to_mxn(price_usd, rate):,} ({price_usd:.2f} USD)"
+
+
+def offer_text(card_name: str, offers: dict | None) -> str:
+    """"[$15](liga) NM · Innistrad Remastered", "sin stock", o "—" si no se consultó."""
+    if offers is None:
+        return "—"
+    offer = offers.get(card_name)
+    if offer is None:
+        return "sin stock"
+    set_name = offer.title[offer.title.find("[") + 1:-1] if "[" in offer.title else offer.title
+    condition = offer.condition.replace("Near Mint", "NM").replace("Lightly Played", "LP")
+    return f"[${offer.price_mxn:,.0f}]({offer.url}) {condition} · {set_name}"
+
+
+def store_links(card_name: str) -> str:
+    """Ligas Markdown a la búsqueda de la carta en cada tienda."""
+    return " · ".join(f"[{store}]({url})" for store, url in search_links(card_name).items())
 
 
 def game_changer_suggestion(analysis: DeckAnalysis) -> list[str]:
@@ -362,11 +396,6 @@ def game_changer_suggestion(analysis: DeckAnalysis) -> list[str]:
     extra = f" En tu Maybeboard: {names(maybe_with_location(analysis, in_maybe))}." if in_maybe else ""
     return [f"- **Te quedan {limit - used} espacio(s) de Game Changer** en bracket {analysis.profile.bracket}; "
             f"úsalos en consistencia (robo, protección, ramp).{extra}"]
-
-
-def store_links(card_name: str) -> str:
-    """Ligas Markdown a la búsqueda de la carta en cada tienda."""
-    return " · ".join(f"[{store}]({url})" for store, url in search_links(card_name).items())
 
 
 def maybe_game_changers(analysis: DeckAnalysis) -> list[str]:

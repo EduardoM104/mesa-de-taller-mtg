@@ -4,6 +4,7 @@ from taller.analysis import bracket, mana
 from taller.analysis.analyze import DeckAnalysis, target_turn
 from taller.analysis.report import has_theme_type, nonland_without_role, render
 from taller.analysis.roles import group_by_role
+from taller.prices.yellow_rabbit import Offer
 from taller.profiles import DeckProfile
 from taller.sources.archidekt import Deck
 
@@ -110,5 +111,15 @@ def test_shopping_list_in_report():
     deck_card, card = make_entry("Mentor of the Meek", type_line="Creature", tags=["repeatable pure draw"])
     card.price_usd = 4.72
     report = render(build_analysis(ENTRIES, maybe_entries=[(deck_card, card)]))
-    assert "| Mentor of the Meek | robo | 4.72 | $85 |" in report
+    assert "| Mentor of the Meek | robo | $85 (4.72 USD) | — |" in report
     assert "[TCG Wolf](https://www.tcgwolf.com/buscar?q=Mentor+of+the+Meek)" in report
+
+
+def test_shopping_list_shows_store_offer():
+    deck_card, card = make_entry("Mentor of the Meek", type_line="Creature", tags=["repeatable pure draw"])
+    analysis = build_analysis(ENTRIES, maybe_entries=[(deck_card, card)])
+    analysis.store_offers = {"Mentor of the Meek": Offer(
+        title="Mentor of the Meek [Innistrad Remastered]", condition="Near Mint", price_mxn=15,
+        url="https://yellowrabbit.mx/products/mentor")}
+    report = render(analysis)
+    assert "[$15](https://yellowrabbit.mx/products/mentor) NM · Innistrad Remastered" in report

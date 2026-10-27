@@ -9,3 +9,8 @@ carpeta_manabox = "~/Documents/MTG Archive"
 [precios]
 # Pesos por dólar para convertir los precios de referencia (USD) a MXN.
 tipo_de_cambio = 18
+
+[tiendas]
+# Perfil público (UCP) con el que nos identificamos ante Yellow Rabbit: un JSON
+# servido como application/json. Sin esto, la lista de compra solo trae ligas.
+# perfil_ucp = "https://gist.githack.com/<usuario>/<gist>/raw/<versión>/mesa-de-taller-ucp.json"

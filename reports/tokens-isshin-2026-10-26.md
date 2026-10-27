@@ -107,15 +107,17 @@ Fuente: Commander Spellbook.
 
 ### Lista de compra
 
-Sugerencias del Maybeboard que no están en tu colección. Precio de referencia de Scryfall (TCGplayer, 2026-10-26), tipo de cambio 18. Las ligas buscan la carta en cada tienda para ver su precio en pesos.
+Sugerencias del Maybeboard que no están en tu colección. Referencia: Scryfall (TCGplayer, 2026-10-26) a 18 pesos por dólar. Yellow Rabbit: la copia más barata en stock (NM o LP).
 
-| Carta | Para | USD | MXN aprox. | Tiendas |
+| Carta | Para | Referencia | Yellow Rabbit | Buscar |
 | --- | --- | --- | --- | --- |
-| Welcoming Vampire | robo | 2.63 | $47 | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Welcoming+Vampire) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Welcoming+Vampire) |
-| Mentor of the Meek | robo | 4.72 | $85 | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Mentor+of+the+Meek) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Mentor+of+the+Meek) |
-| Teferi's Protection | Game Changer | 46.87 | $844 | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Teferi%27s+Protection) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Teferi%27s+Protection) |
-| Caesar, Legion's Emperor | robo | sin precio | — | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Caesar%2C+Legion%27s+Emperor) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Caesar%2C+Legion%27s+Emperor) |
-| **Total** | | **54.22** | **$976** | |
+| Welcoming Vampire | robo | $47 (2.63 USD) | sin stock | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Welcoming+Vampire) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Welcoming+Vampire) |
+| Mentor of the Meek | robo | $85 (4.72 USD) | [$15](https://yellowrabbit.mx/products/mentor-of-the-meek-retro-frame-innistrad-remastered) NM · Innistrad Remastered | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Mentor+of+the+Meek) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Mentor+of+the+Meek) |
+| Teferi's Protection | Game Changer | $844 (46.87 USD) | [$815](https://yellowrabbit.mx/products/tchallas-protection-teferis-protection-borderless-marvel-universe-eternal-legal) NM · Marvel Universe: Eternal-Legal | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Teferi%27s+Protection) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Teferi%27s+Protection) |
+| Caesar, Legion's Emperor | robo | sin precio | sin stock | [Yellow Rabbit](https://yellowrabbit.mx/search?q=Caesar%2C+Legion%27s+Emperor) · [TCG Wolf](https://www.tcgwolf.com/buscar?q=Caesar%2C+Legion%27s+Emperor) |
+| **Total** | | **$976** | **$830** | |
+
+El total de Yellow Rabbit no incluye 2 carta(s) sin stock.
 
 ## 8. Ventana de victoria
 
