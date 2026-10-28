@@ -2,6 +2,8 @@
 
 Brief del proyecto para Claude Code (y cualquier otro agente que trabaje en este repo, como Gemini en Antigravity). Léelo completo antes de proponer o escribir código.
 
+El estado actual (qué está hecho, cómo se usa, limitaciones) está resumido en `docs/contexto-proyecto.md`; mantenlo al día al cerrar cada paso grande.
+
 ## Contexto
 
 - Dueño: Martín, jugador de Commander casual en CDMX. También tiene un proyecto competitivo aparte (Standard en Arena en 2026, papel en 2027).
@@ -81,15 +83,17 @@ mesa-de-taller-mtg/
 │   ├── cache/             # respuestas de APIs con fecha (no se versiona)
 │   ├── imports/           # CSV de ManaBox, Archidekt, etc. (no se versiona)
 │   └── taller.db          # (no se versiona)
-├── reports/               # reportes generados en Markdown
+├── reports/               # reportes: <slug>-<fecha>.md (Markdown) y .json (datos para la web)
 ├── src/taller/
-│   ├── sources/           # un módulo por fuente: scryfall, archidekt, spellbook, edhrec, tiendas
+│   ├── sources/           # un módulo por fuente: scryfall, archidekt, spellbook, decklist (texto de Moxfield); EDHREC pendiente
 │   ├── collection/        # importación y consulta de la colección
-│   ├── analysis/          # roles, curva, base de maná, bracket, combos, sinergia
-│   ├── prices/            # precios y conversión a MXN
-│   └── cli.py
+│   ├── analysis/          # roles, curva, base de maná, bracket, combos, sinergia; report.py (Markdown) y snapshot.py (JSON)
+│   ├── prices/            # precios, conversión a MXN, Yellow Rabbit (UCP), ligas de tiendas y envíos
+│   ├── web/               # FastAPI: app.py, templates/ (Jinja2) y static/style.css
+│   ├── config.py          # lectura de config.toml
+│   └── cli.py             # comandos: analizar, comparar, coleccion importar, web
 ├── tests/
-└── docs/
+└── docs/                  # bitacora-desarrollo.md (sesiones) y contexto-proyecto.md (estado actual)
 ```
 
 ## Fuentes de datos y reglas de uso
@@ -144,7 +148,7 @@ Para un mazo de bracket 4 como Aang, `ventana_victoria` sería `"turno 3-4"` y e
 
 ## Qué produce el análisis de un mazo
 
-Un reporte en Markdown en `reports/` que siempre compara contra el perfil:
+Un reporte en Markdown en `reports/` que siempre compara contra el perfil. Junto a él se guarda un `.json` con los mismos datos, que la web usa para dibujar la página del mazo sin volver a consultar internet:
 
 1. **Resumen**: qué tan bien cumple su objetivo, en 3–5 líneas.
 2. **Roles**: ramp, robo, removal, wipes, protección, condiciones de victoria y piezas del tema, con conteos y comparación contra referencias habituales del formato.
@@ -182,7 +186,7 @@ Cada fase termina cuando cumple su criterio de terminado. No empezar la siguient
 - **Fase 1. Analizador de mazos.** Comando `taller analizar <slug>` que lee el perfil, trae el mazo de Archidekt, cruza con Scryfall y Spellbook, y escribe el reporte. También acepta un mazo ajeno (texto exportado de Moxfield o URL de Archidekt) para compararlo contra uno propio. *Terminado:* reportes útiles para el mazo de tokens (Isshin) y para DragonSSSS! (Ureni). Aang se cambió por Ureni porque su lista en Archidekt está incompleta (decisión de Martín, 2026-10-25).
 - **Fase 2. Colección.** Importar CSV de ManaBox por caja; las sugerencias marcan "ya la tienes, está en tal caja". *Terminado:* al menos una caja importada y visible en un reporte. ✅ 2026-10-26 (Orzhov WB en el reporte de Isshin).
 - **Fase 3. Precios.** Precios de referencia y de tiendas mexicanas, lista de compra al mejor costo total. *Terminado:* lista de compra en MXN para las sugerencias de un mazo. ✅ 2026-10-26 (Isshin, con Yellow Rabbit y envío).
-- **Fase 4. Web.** Consulta de reportes, colección y lista de compra desde iPhone, iPad y la Mac del trabajo. *Terminado:* accesible con login desde el iPhone.
+- **Fase 4. Web.** Consulta de reportes, colección y lista de compra desde iPhone, iPad y la Mac del trabajo. *Terminado:* accesible con login desde el iPhone. Avance: esqueleto ✅ y página de mazo diseñada ✅ (2026-10-27); faltan la página de colección y el acceso por Tailscale.
 - **Fase 5. Simulación y bitácora.** Simulación de partidas en solitario para estimar la ventana de victoria (prioridad: Aang en turno 3–4) e integración de la bitácora de partidas en los reportes.
 
 ## Bitácora de partidas
