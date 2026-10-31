@@ -151,3 +151,34 @@
 - Si se edita el gist, actualizar la versión en `perfil_ucp` de `config.toml` (githack guarda copia de la versión anterior).
 - Candidata: CardTrader (API oficial con token de la cuenta de Martín).
 - **Fase 4: web.** Antes de arrancar hay que decidir entre Streamlit y Next.js, y el hosting.
+
+## 2026-10-27 — Fase 4: web (pasos 1 y 2)
+
+### Qué se hizo
+
+- **Decisión:** FastAPI + plantillas Jinja2 + CSS propio, primero en la Mac (127.0.0.1) y después en el iPhone por Tailscale. Se descartaron Streamlit (poco control del diseño) y Next.js (otro lenguaje).
+- **Paso 1, esqueleto:** `uv run taller web`, con la portada (una tarjeta por mazo) y una página por mazo que mostraba el reporte Markdown.
+- **Paso 2, página de mazo diseñada:**
+  - `taller analizar` guarda ahora un `.json` junto al `.md`, y la web dibuja con esos datos sin consultar internet.
+  - Contenido de la página:
+    - roles como barras contra su rango de referencia;
+    - curva de maná en columnas;
+    - símbolos de color hechos con CSS;
+    - sinergia en grupos sin repetir cartas;
+    - sugerencias en tarjetas;
+    - lista de compra en tarjetas para el celular.
+- **Documentación:** `docs/contexto-proyecto.md` resume el estado del proyecto para quien no ve el repo. CLAUDE.md quedó al día.
+
+99 pruebas pasando.
+
+### Qué aprendimos
+
+- Separar los **datos** (JSON) de la **presentación** (HTML) permite rediseñar la página sin tocar el análisis.
+- En Jinja, `shop.items` es el método `.items()` del diccionario, no la llave "items": se usa `shop["items"]`.
+- En barras que se comparan entre sí, todas deben compartir escala y ancho; si una columna de texto cambia de tamaño, las barras dejan de ser comparables.
+- Revisar capturas de pantalla encuentra errores de diseño que las pruebas no ven.
+
+### Qué sigue
+
+- **Fase 4, paso 3:** página de colección (buscar una carta y ver en qué caja está).
+- **Fase 4, paso 4:** acceso desde el iPhone con Tailscale.
